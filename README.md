@@ -1,4 +1,4 @@
-# 3nurka
+# front_3nurka
 
 ## Project setup
 ```
