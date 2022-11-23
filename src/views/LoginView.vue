@@ -1,18 +1,10 @@
 <template>
   <div>
-     <div class="row">
-      <div class="col-md-4">
-        <div class="thumbnail">
-          <img src="logo_3nurka.png" alt="logo_3nurka" style="width:40%">
-            <div class="caption">
-            </div>
-        </div>
+    <div class="container">
 
-      </div>
+    <div class="m-lg-2" style="width: 260px;">
+      <img src="logo_3nurka.png" alt="logo_3nurka" style="width:60%">
     </div>
-
-
-
 
     <ul class="nav justify-content-end">
     <nav class="nav-fill navbar-light">
@@ -23,6 +15,8 @@
       </form>
     </nav>
     </ul>
+
+
 
     <div class="container">
       <div class="container text-center">
@@ -57,6 +51,7 @@
       </div>
 
       </div>
+    </div>
 
 
 
