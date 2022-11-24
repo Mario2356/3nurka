@@ -20,6 +20,7 @@
               |
               <router-link to="/login">Logi sisse</router-link>
               |
+              <router-link to="/register">Loo konto</router-link>
             </nav>
           </div>
 

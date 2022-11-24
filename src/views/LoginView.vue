@@ -1,21 +1,7 @@
 <template>
   <div>
 
-<!--    <div class="container">-->
 
-<!--      <div class="m-lg-2" style="width: 260px;">-->
-<!--        <img src="logo_3nurka.png" alt="logo_3nurka" style="width:60%">-->
-<!--      </div>-->
-
-<!--      <ul class="nav justify-content-end">-->
-<!--        <nav class="nav-fill navbar-light">-->
-<!--          <form class="container-fluid justify-content-end">-->
-<!--            <button class="btn btn-outline-dark me-2" type="button">Esileht</button>-->
-<!--            <button class="btn btn-outline-dark me-2" type="button">Logi sisse</button>-->
-<!--            <button class="btn btn-outline-dark me-2" type="button">Kontakt</button>-->
-<!--          </form>-->
-<!--        </nav>-->
-<!--      </ul>-->
 
 
       <div class="container">
@@ -55,6 +41,7 @@
     </div>
 
   </div>
+
 </template>
 
 <script>
