@@ -26,6 +26,13 @@
             <div class="row input-group mb-3">
               <button v-on:click="goToRegister" type="button" class="btn btn-success">Loo uus konto</button>
             </div>
+
+          </div>
+
+
+          <div v-if="errorResponse.message.length > 0" class="alert alert-danger d-flex align-items-center" role="alert">
+            {{ errorResponse.message }}
+
           </div>
 
 
@@ -70,30 +77,40 @@ export default {
   },
   methods: {
 
-    login: function () {
-      this.$http.get("/login", {
-            params: {
-              email: this.email,
-              password: this.password
-            }
-          }
-      ).then(response => {
-        this.loginResponse = response.data
-        if (this.loginResponse.roleType === 'admin') {
-          sessionStorage.setItem('userId', this.loginResponse.userId);
-          this.$router.push({
-            name: 'adminHomeRoute'
-          });
 
-        } else {
-        this.$router.push({name: 'customerHomeRoute', query: {
-          userId: this.loginResponse.userId,
-            roleName: this.loginResponse.roleType
-          }})
-        }
-      }).catch(error => {
-        alert("Valed andmed!")
-      })
+    login: function () {
+
+      this.errorResponse.message = ''
+      if (this.email.length == 0 || this.password.length == 0) {
+        this.errorResponse.message = 'Täida kõik väljad';
+      } else {
+
+        this.$http.get("/login", {
+              params: {
+                email: this.email,
+                password: this.password
+              }
+            }
+        ).then(response => {
+          this.loginResponse = response.data
+          if (this.loginResponse.roleType === 'admin') {
+            sessionStorage.setItem('userId', this.loginResponse.userId);
+            this.$router.push({
+              name: 'adminHomeRoute'
+            });
+
+          } else {
+            this.$router.push({
+              name: 'customerHomeRoute', query: {
+                userId: this.loginResponse.userId,
+                roleName: this.loginResponse.roleType
+              }
+            })
+          }
+        }).catch(error => {
+          this.errorResponse = error.response.data
+        })
+      }
     },
     goToRegister: function () {
       this.$router.push({name: 'registerRoute'})
