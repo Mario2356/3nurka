@@ -7,25 +7,25 @@
         <div class="col-4">
           <div class="row input-group mb-4">
             <span class="input-group-text" id="inputGroup-sizing-default">e-posti aadress</span>
-            <input type="text" class="form-control" aria-label="Sizing example input"
+            <input v-model="email" type="text" class="form-control" aria-label="Sizing example input"
                    aria-describedby="inputGroup-sizing-default">
           </div>
 
           <div class="row input-group mb-4">
             <span class="input-group-text" id="inputGroup-sizing-default">Parool</span>
-            <input type="text" class="form-control" aria-label="Sizing example input"
+            <input v-model="password" type="text" class="form-control" aria-label="Sizing example input"
                    aria-describedby="inputGroup-sizing-default">
           </div>
 
 
           <div class="col-5">
-          <div class="row input-group mb-3">
-            <button type="button" class="btn btn-success">Logi sisse</button>
-          </div>
+            <div class="row input-group mb-3">
+              <button v-on:click="login" type="button" class="btn btn-success">Logi sisse</button>
+            </div>
 
-          <div class="row input-group mb-3">
-            <button type="button" class="btn btn-success">Loo uus konto</button>
-          </div>
+            <div class="row input-group mb-3">
+              <button v-on:click="goToRegister" type="button" class="btn btn-success">Loo uus konto</button>
+            </div>
           </div>
 
 
@@ -43,15 +43,65 @@
       </div>
     </div>
 
-
-  </div>
-
   </div>
 
 </template>
 
 <script>
 export default {
-  name: "LoginView"
+  name: "LoginView",
+  data: function () {
+    return {
+      email: '',
+      password: '',
+
+      loginResponse: {
+        userId: 0,
+        roleId: 0,
+        roleType: ''
+      },
+      errorResponse: {
+        message: '',
+        errorCode: 0
+      }
+
+    }
+
+  },
+  methods: {
+
+    login: function () {
+      this.$http.get("/login", {
+            params: {
+              email: this.email,
+              password: this.password
+            }
+          }
+      ).then(response => {
+        this.loginResponse = response.data
+        if (this.loginResponse.roleType === 'admin') {
+          sessionStorage.setItem('userId', this.loginResponse.userId);
+          this.$router.push({
+            name: 'adminHomeRoute'
+          });
+
+        } else {
+        this.$router.push({name: 'customerHomeRoute', query: {
+          userId: this.loginResponse.userId,
+            roleName: this.loginResponse.roleType
+          }})
+        }
+      }).catch(error => {
+        alert("Valed andmed!")
+      })
+    },
+    goToRegister: function () {
+      this.$router.push({name: 'registerRoute'})
+
+    }
+
+  },
+
+
 }
 </script>

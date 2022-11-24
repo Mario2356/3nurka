@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from "@/views/LoginView";
 import RegisterView from "@/views/RegisterView";
+import AdminHomeView from "@/views/AdminHomeView";
+import CustomerHomeView from "@/views/CustomerHomeView";
 
 Vue.use(VueRouter)
 
@@ -13,13 +15,23 @@ const routes = [
     component: HomeView
   },
   {
+    path: '/admin',
+    name: 'adminHomeRoute',
+    component: AdminHomeView
+  },
+  {
+    path: '/customer',
+    name: 'customerHomeRoute',
+    component: CustomerHomeView
+  },
+  {
     path: '/login',
     name: 'loginRoute',
     component: LoginView
   },
   {
     path: '/register',
-    name: 'RegisterRoute',
+    name: 'registerRoute',
     component: RegisterView
   },
   {
