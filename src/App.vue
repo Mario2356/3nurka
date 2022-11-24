@@ -1,14 +1,17 @@
 <template>
   <div>
-    <div class="container upper">
+    <div class="container">
       <div class="row">
         <div class="col-2">
-          <img
-              src="https://media.4rgos.it/i/Argos/0920-m0014-m007-m050-asym-m008-m022-adultbikeguide-7603802?maxW=768&qlt=75&fmt.jpeg.interlaced=true"
-              style="width:60%"
-              alt="jalgratas">
+
+          <div class="m-lg-2" style="width: 260px;">
+            <img src="logo_3nurka.png" alt="logo_3nurka" style="width:60%">
+          </div>
+
         </div>
-        <div class="col-6">
+
+
+        <div class="col d-inline-block">
           <div id="app">
             <nav>
               <router-link to="/">Home</router-link>
@@ -20,12 +23,15 @@
               <router-link to="/register">Loo konto</router-link>
             </nav>
           </div>
+
+          <div class="row"></div>
+
+            <router-view/>
+          </div>
+
         </div>
       </div>
-      <div class="row">
-      </div>
-      <div class="row">
-      </div>
+
     </div>
   </div>
 </template>
