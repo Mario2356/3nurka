@@ -11,7 +11,7 @@
       <nav>
         <router-link to="/">Esileht</router-link>
         |
-        <router-link to="/about">Meist</router-link>
+        <router-link to="/pricelist">Hinnakiri</router-link>
         |
         <router-link to="/login">Logi sisse</router-link>
       </nav>

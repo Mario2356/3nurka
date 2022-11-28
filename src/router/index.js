@@ -5,6 +5,12 @@ import LoginView from "@/views/LoginView";
 import RegisterView from "@/views/RegisterView";
 import AdminHomeView from "@/views/AdminHomeView";
 import CustomerHomeView from "@/views/CustomerHomeView";
+import OrderView from "@/views/OrderView";
+import RepairView from "@/views/RepairView";
+import MaintenanceView from "@/views/MaintenanceView";
+import StorageView from "@/views/StorageView";
+import CustomerProfileView from "@/views/CustomerProfileView";
+import PricelistView from "@/views/PricelistView";
 
 Vue.use(VueRouter)
 
@@ -25,6 +31,12 @@ const routes = [
     component: CustomerHomeView
   },
   {
+    path: '/customer/profile',
+    name: 'customerProfileRoute',
+    component: CustomerProfileView
+  },
+
+  {
     path: '/login',
     name: 'loginRoute',
     component: LoginView
@@ -35,15 +47,31 @@ const routes = [
     component: RegisterView
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: function () {
-      return import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-    }
-  }
+    path: '/order',
+    name: 'orderRoute',
+    component: OrderView
+  },
+  {
+    path: '/repair',
+    name: 'repairRoute',
+    component: RepairView
+  },
+  {
+    path: '/maintenance',
+    name: 'maintenanceRoute',
+    component: MaintenanceView
+  },
+  {
+    path: '/storage',
+    name: 'storageRoute',
+    component: StorageView
+  },
+  {
+    path: '/pricelist',
+    name: 'pricelistRoute',
+    component: PricelistView
+  },
+
 ]
 
 const router = new VueRouter({

@@ -1,5 +1,6 @@
 <template>
-  <div>
+
+  <div class="container p-5">
     <div class="row justify-content-center">
       <div class="col-11">
 
@@ -8,10 +9,10 @@
 
           <div class="card-img-overlay d-flex" style="color: white">
             <div class="mt-auto text-left bg-dark bg-opacity-25">
-              <h3 class="display-3">JALGRATASTE </h3>
-              <h3 class="display-3">REMONT,</h3>
-              <h3 class="display-3">HOOLDUS JA</h3>
-              <h3 class="display-3">HOIUSTAMINE</h3>
+              <h4 class="display-4">JALGRATASTE </h4>
+              <h4 class="display-4">REMONT,</h4>
+              <h4 class="display-4">HOOLDUS JA</h4>
+              <h4 class="display-4">HOIUSTAMINE</h4>
             </div>
           </div>
         </div>
@@ -19,8 +20,8 @@
     </div>
 
     <div class="row justify-content-center m-5">
-      <div class="col-11">
-        <h3 class="display-3">Pakume järgnevaid teenuseid</h3>
+      <div class="col-9">
+        <u><h3>Pakume järgnevaid teenuseid</h3></u>
       </div>
     </div>
 
@@ -73,12 +74,10 @@
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'HomeView',
   components: {
-    HelloWorld
   }
 }
 </script>

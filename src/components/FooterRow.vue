@@ -22,24 +22,3 @@ export default {
   name: 'FooterRow'
 }
 </script>
-<style>
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-.footer {
-  background-color: lightgray;
-  /*color: cornsilk;*/
-  bottom: 0;
-  with:100%;
-  line-height: 0.75;
-  padding: 10px;
-
-}
-
-</style>
