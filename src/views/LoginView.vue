@@ -41,7 +41,7 @@
 
         <div class="col-7">
           <div class="thumbnail">
-            <img class="img-responsive" src="pilt_1.jpg" alt="pilt_1" style="width:100%">
+            <img class="img-responsive" src="/image_1.jpg" alt="image_1" style="width:100%">
             <div class="caption">
             </div>
           </div>

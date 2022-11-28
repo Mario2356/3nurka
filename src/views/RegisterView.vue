@@ -6,22 +6,22 @@
       <div class="col-4">
         <div class="input-group mb-4">
           <span class="input-group-text" id="inputGroup-sizing-default">Eesnimi*</span>
-          <input v-model="registerCustomerRequest.firstName" type="text" class="form-control" aria-label="Sizing example input"
+          <input v-model="registerCustomerInfo.firstName" type="text" class="form-control" aria-label="Sizing example input"
                  aria-describedby="inputGroup-sizing-default">
         </div>
         <div class="input-group mb-4">
           <span class="input-group-text" id="inputGroup-sizing-default">Perekonnanimi*</span>
-          <input v-model="registerCustomerRequest.lastName" type="text" class="form-control" aria-label="Sizing example input"
+          <input v-model="registerCustomerInfo.lastName" type="text" class="form-control" aria-label="Sizing example input"
                  aria-describedby="inputGroup-sizing-default">
         </div>
         <div class="input-group mb-4">
           <span class="input-group-text" id="inputGroup-sizing-default">e-posti aadress*</span>
-          <input v-model="registerCustomerRequest.user.email" type="text" class="form-control" aria-label="Sizing example input"
+          <input v-model="registerCustomerInfo.user.email" type="text" class="form-control" aria-label="Sizing example input"
                  aria-describedby="inputGroup-sizing-default">
         </div>
         <div class="input-group mb-4">
           <span class="input-group-text" id="inputGroup-sizing-default">Salasõna*</span>
-          <input v-model="registerCustomerRequest.user.password" type="password" class="form-control" aria-label="Sizing example input"
+          <input v-model="registerCustomerInfo.user.password" type="password" class="form-control" aria-label="Sizing example input"
                  aria-describedby="inputGroup-sizing-default">
         </div>
         <div class="input-group mb-4">
@@ -59,7 +59,7 @@ export default {
   name: "RegisterView",
   data: function () {
     return {
-      registerCustomerRequest: {
+      registerCustomerInfo: {
         firstName: '',
         lastName: '',
         user: [
@@ -79,7 +79,7 @@ export default {
   },
   methods: {
       addCustomer: function () {
-        this.$http.post("/register", this.registerCustomerRequest
+        this.$http.post("/register", this.registerCustomerInfo
         ).then(response => {
           console.log(response.data)
         }).catch(error => {
