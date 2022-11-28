@@ -1,38 +1,11 @@
 <template>
-  <div>
-    <div class="container">
-      <div class="row">
-        <div class="col-2">
-
-          <div class="m-lg-2" style="width: 260px;">
-            <img src="logo_3nurka.png" alt="logo_3nurka" style="width:60%">
-          </div>
-
-        </div>
+  <div id="app">
+    <HeaderRow/>
 
 
-        <div class="col d-inline-block">
-          <div id="app">
-            <nav>
-              <router-link to="/">Home</router-link>
-              |
-              <router-link to="/about">About</router-link>
-              |
-              <router-link to="/login">Logi sisse</router-link>
-              |
-              <router-link to="/register">Loo konto</router-link>
-            </nav>
-          </div>
-
-          <div class="row"></div>
-
-          <router-view/>
-        </div>
-
-      </div>
+    <router-view/>
+    <FooterRow/>
     </div>
-
-  </div>
 </template>
 
 <style>
@@ -57,3 +30,13 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 </style>
+<script>
+import FooterRow from "@/components/FooterRow";
+import HeaderRow from "@/components/HeaderRow";
+
+
+export default {
+  components: {HeaderRow, FooterRow}
+
+}
+</script>
