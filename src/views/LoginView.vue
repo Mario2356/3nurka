@@ -41,7 +41,7 @@
 
         <div class="col-7">
           <div class="thumbnail">
-            <img class="img-responsive" src="/image_1.jpg" alt="image_1" style="width:100%">
+            <img class="img-responsive login-image" src="../assets/image_1.jpg" alt="image_1">
             <div class="caption">
             </div>
           </div>

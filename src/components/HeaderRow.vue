@@ -2,8 +2,8 @@
   <div class="container header">
     <div class="row">
     <div class="col-md-7">
-      <div class="m-1" style="width: 260px;">
-        <img src="logo_3nurka.png" alt="logo_3nurka" style="width:60%">
+      <div class="m-1 logo">
+        <img src="../assets/logo_3nurka.png" alt="logo_3nurka" class="header-logo">
       </div>
 
     </div>
@@ -28,17 +28,5 @@ export default {
 }
 </script>
 <style>
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-.header {
-
-}
 
 </style>

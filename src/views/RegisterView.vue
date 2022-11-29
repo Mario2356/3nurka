@@ -40,10 +40,10 @@
 
         </div>
       </div>
-      <div class="col-8">
+      <div class="col-6">
         <img
-            src="https://media.4rgos.it/i/Argos/0920-m0014-m007-m050-asym-m008-m022-adultbikeguide-7603802?maxW=768&qlt=75&fmt.jpeg.interlaced=true"
-            alt="jalgratas">
+            src="../assets/image_1.jpg"
+            alt="jalgratas" class="register-image">
       </div>
 
     </div>
