@@ -1,6 +1,6 @@
 <template>
 
-  <div class="container p-5">
+  <div class="container p-2 pb-5">
     <div class="row justify-content-center">
       <div class="col-11">
 
@@ -27,43 +27,48 @@
 
 
 
-    <div class="row row-cols-1 row-cols-md-3 m-5">
+    <div class="row row-cols-1 row-cols-md-3 m-5 card-deck">
       <div class="col justify-content-center">
         <div class="card h-100">
           <img src="/image_1.jpg" class="card-img-top" alt="image_1">
           <div class="card-body">
-            <h5 class="card-title">REMONT</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-              content. This content is a little bit longer.</p>
+            <h4 class="card-title pt-5">REMONT</h4>
+            <p class="card-text">Saad enda kaherattalise sõbra kiirelt korda, ilma ratast pikalt hoiule andmata.
+              Meie mehaanik tuleb Tallinnas millal ja kuhu soovid. Remonditud saavad ükskõik, mis tüüpi jalgrattad! Olgu selleks
+              siis laste, linna, maastiku, võistluste, mäestlaskumis, elektri, tõukeratas. </p>
           </div>
-          <div class="card-footer">
-            <small class="text-muted"></small>
+        </div>
+        <div class="p-3">
+        <a href="#" class="btn btn-success">Telli remont</a>
           </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img src="/image_1.jpg" class="card-img-top" alt="image_1">
+          <div class="card-body">
+            <h4 class="card-title pt-5">HOOLDUS</h4>
+            <p class="card-text">Jalgratast on mõistlik kontrollida ja hooldada enne sõiduhooaja algust ning sõiduhooaja lõpus.
+              Enne ratta talvepuhkusele saatmist tuleks ratas korralikult puhastada, sest rattale kinnitunud tolm ja pori
+              kivistuvad pika seismise ajal.
+              Ratta kasutuselevõtt on palju kergem kevadel, kui sügisene hooldus on tehtud õigel ajal. Ratast hooldades
+              pikeneb selle eluiga vähemalt 5 korda!</p>
+          </div>
+        </div>
+        <div class="p-3">
+          <a href="#" class="btn btn-success text color: ">Telli hooldus</a>
         </div>
       </div>
       <div class="col">
         <div class="card h-100">
           <img src="/image_1.jpg" class="card-img-top" alt="image_1">
           <div class="card-body">
-            <h5 class="card-title">HOOLDUS</h5>
-            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted"></small>
+            <h4 class="card-title pt-5">HOIUSTAMINE</h4>
+            <p class="card-text"> Hoiusta enda rattaid ja varustust turvalises laos.
+              Tasuta transport lattu ja tagasi 1 kord aastas Tallinnas.</p>
           </div>
         </div>
-      </div>
-      <div class="col">
-        <div class="card h-100">
-          <img src="/image_1.jpg" class="card-img-top" alt="image_1">
-          <div class="card-body">
-            <h5 class="card-title">HOIUSTAMINE</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-              content. This card has even longer content than the first to show that equal height action.</p>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted"></small>
-          </div>
+        <div class="p-3">
+          <a href="#" class="btn btn-success">Telli hoiustamine</a>
         </div>
       </div>
     </div>

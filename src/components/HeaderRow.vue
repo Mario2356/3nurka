@@ -1,13 +1,13 @@
 <template>
-  <div class="container flex-fill header">
+  <div class="container header">
     <div class="row">
-    <div class="col-2">
-      <div class="m-lg-2" style="width: 260px;">
+    <div class="col-md-7">
+      <div class="m-1" style="width: 260px;">
         <img src="logo_3nurka.png" alt="logo_3nurka" style="width:60%">
       </div>
 
     </div>
-    <div class="col d-inline-block">
+    <div class="col d-inline-block h4">
       <nav>
         <router-link to="/">Esileht</router-link>
         |
