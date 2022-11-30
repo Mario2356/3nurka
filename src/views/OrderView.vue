@@ -1,20 +1,29 @@
 <template>
   <div>
 
-    <div class="col-3 mx-auto m-5">
+    <div class="row m-5">
       <h3>Vali teenus</h3>
-
-      <div class="row col-lg-7 m-5">
-        <select v-on:change="clickSelectBrandEvent" v-model="selectedBrandId" class="form-select"
-                aria-label="Default select example">
-          <option selected disabled value="0">--Ratta mark--</option>
-          <option v-for="brand in brands" :key="brand.brandNameId" :value="brand.brandNameId">
-            {{ brand.brandName }}
-          </option>
-        </select>
-      </div>
     </div>
+
+      <div class="row align-items-end justify-content-center">
+        <div class="col-3">
+          <select v-on:change="clickSelectBrandEvent" v-model="selectedBrandId" class="form-select"
+                  aria-label="Default select example">
+            <option selected disabled value="0">--Ratta mark--</option>
+            <option v-for="brand in brands" :key="brand.brandNameId" :value="brand.brandNameId">
+              {{ brand.brandName }}
+            </option>
+          </select>
+        </div>
+        <div class="col-3">
+          <label for="exampleFormControlInput1"></label>
+          <input class="form-control" placeholder="Ratta mudel/kirjeldus">
+        </div>
+      </div>
   </div>
+
+
+
 
 </template>
 
@@ -37,7 +46,7 @@ export default {
 
   methods: {
     getBrandsSelectBoxInfo: function () {
-      this.$http.get("/order/brand")
+      this.$http.get("https://stoplight.io/mocks/toots/myproject/112994102/order/brand")
           .then(response => {
             this.brands = response.data
           })
