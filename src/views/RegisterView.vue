@@ -6,28 +6,29 @@
       <div class="col-4">
         <div class="input-group mb-4">
           <span class="input-group-text" id="inputGroup-sizing-default">Eesnimi*</span>
-          <input v-model="registerCustomerInfo.firstName" type="text" class="form-control" aria-label="Sizing example input"
+          <input v-model="registerRequest.firstName" type="text" class="form-control" aria-label="Sizing example input"
                  aria-describedby="inputGroup-sizing-default">
         </div>
         <div class="input-group mb-4">
           <span class="input-group-text" id="inputGroup-sizing-default">Perekonnanimi*</span>
-          <input v-model="registerCustomerInfo.lastName" type="text" class="form-control" aria-label="Sizing example input"
+          <input v-model="registerRequest.lastName" type="text" class="form-control" aria-label="Sizing example input"
                  aria-describedby="inputGroup-sizing-default">
         </div>
         <div class="input-group mb-4">
           <span class="input-group-text" id="inputGroup-sizing-default">e-posti aadress*</span>
-          <input v-model="registerCustomerInfo.user.email" type="text" class="form-control" aria-label="Sizing example input"
+          <input v-model="registerRequest.email" type="text" class="form-control" aria-label="Sizing example input"
                  aria-describedby="inputGroup-sizing-default">
         </div>
         <div class="input-group mb-4">
           <span class="input-group-text" id="inputGroup-sizing-default">Salasõna*</span>
-          <input v-model="registerCustomerInfo.user.password" type="password" class="form-control" aria-label="Sizing example input"
+          <input v-model="registerRequest.password" type="password" class="form-control"
+                 aria-label="Sizing example input"
                  aria-describedby="inputGroup-sizing-default">
         </div>
         <div class="input-group mb-4">
           <span class="input-group-text" id="inputGroup-sizing-default">Korda salasõna*</span>
 
-<!--          todo:Korda salasõnale tuleb ka muutuja määrata, kontrollida eelmisega klappimist-->
+          <!--          todo:Korda salasõnale tuleb ka muutuja määrata, kontrollida eelmisega klappimist-->
 
           <input v-model="repeatPassword" type="password" class="form-control" aria-label="Sizing example input"
                  aria-describedby="inputGroup-sizing-default">
@@ -59,17 +60,17 @@ export default {
   name: "RegisterView",
   data: function () {
     return {
-      registerCustomerInfo: {
+      registerRequest: {
         firstName: '',
         lastName: '',
-        user: [
-          {
-            roleId: 2,
-            email: '',
-            password:'',
-          }
-        ]
+        email: '',
+        password: ''
       },
+
+      registerResponse: {
+        userId: 0,
+      },
+
       errorResponse: {
         message: '',
         errorCode: 0
@@ -78,15 +79,18 @@ export default {
     }
   },
   methods: {
-      addCustomer: function () {
-        this.$http.post("/register", this.registerCustomerInfo
-        ).then(response => {
-          console.log(response.data)
-        }).catch(error => {
-          console.log(error)
-        })
-      }
-    }
+    addCustomer: function () {
+      this.$http.post("/register/new", this.registerRequest
+      ).then(response => {
+        this.registerResponse = response.data
+        sessionStorage.setItem('userId', this.registerResponse.userId)
+        // push edasi
+
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+  }
 }
 </script>
 
