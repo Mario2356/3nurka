@@ -70,7 +70,9 @@
         <div class="p-3">
           <a href="#" class="btn btn-success">Telli hoiustamine</a>
         </div>
+
       </div>
+
     </div>
 
 

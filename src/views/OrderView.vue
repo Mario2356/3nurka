@@ -5,8 +5,17 @@
       <h5>Vali rippmenüüst ratta mark, märgi ka ratta mudel või kirjeldus</h5>
     </div>
 
+
+    <div class="text-start row-cols-6">
+      <div class="col">
+      <button class="btn btn-success">Minu teenused</button>
+      <button class="btn btn-success">Minu profiil</button>
+    </div>
+  </div>
+
     <div class="row align-items-end justify-content-center">
       <div class="col-3">
+
         <select v-on:change="clickSelectBrandEvent" v-model="selectedBrandId" class="form-select"
                 aria-label="Default select example">
           <option selected disabled value="0">--Ratta mark--</option>
@@ -45,7 +54,6 @@
       </div>
     </div>
 
-
     <div class="justify-content-center">
       <button v-on:click="navigateToRepair" class=" btn btn-outline-success btn-lg m-5">REMONT</button>
       <button v-on:click="navigateToMaintenance" class="btn btn-outline-primary btn-lg m-5">HOOLDUS</button>
@@ -79,13 +87,13 @@ export default {
       bikeRequest: {
         brandId: 0,
         brandName: '',
-        model:''
+        model: ''
       },
 
       bikeResponse: {
         brandId: 0,
         brandName: '',
-        model:''
+        model: ''
 
       }
     }
