@@ -1,8 +1,8 @@
 <template>
   <div>
 
-    <div class="row m-5">
-      <h5>Vali rippmenüüst ratta mark, kirjuta ratta mudel või kirjeldus ning seejärel vali teenus</h5>
+    <div class="row m-5 mb-3">
+      <h5>Vali rippmenüüst ratta mark, märgi ka ratta mudel või kirjeldus</h5>
     </div>
 
     <div class="row align-items-end justify-content-center">
@@ -10,7 +10,7 @@
         <select v-on:change="clickSelectBrandEvent" v-model="selectedBrandId" class="form-select"
                 aria-label="Default select example">
           <option selected disabled value="0">--Ratta mark--</option>
-          <option v-for="brand in brands" :key="brand.brandId" :value="brand.brandId">
+          <option v-for="brand in brands" :key="brand.brandNameId" :value="brand.brandNameId">
             {{ brand.brandName }}
           </option>
         </select>
@@ -21,6 +21,9 @@
       </div>
     </div>
 
+    <div class="m-5">
+      <button class="btn btn-outline-dark">Lisa ratas valikusse</button>
+    </div>
     <div class="row justify-content-center m-5">
       <div class="col-lg-5">
         <table class="table table-bordered">
@@ -32,8 +35,8 @@
           </thead>
           <tbody>
           <tr>
-            <th scope="row"> Trek</th>
-            <td>KHT234</td>
+            <th scope="row"></th>
+            <td></td>
           </tr>
           </tbody>
         </table>
@@ -42,9 +45,9 @@
 
 
     <div class="justify-content-center">
-      <button @click="disabled " type="button" class="btn btn-success btn-lg m-5" :disabled="clickable">REMONT</button>
-      <button type="button" class="btn btn-primary btn-lg m-5">HOOLDUS</button>
-      <button type="button" class="btn btn-warning btn-lg m-5">HOIUSTAMINE</button>
+      <button v-on:click="navigateToRepair" class=" btn btn-outline-success btn-lg m-5">REMONT</button>
+      <button v-on:click="navigateToMaintenance" class="btn btn-outline-primary btn-lg m-5">HOOLDUS</button>
+      <button v-on:click="navigateToStorage" class="btn btn-outline-warning btn-lg m-5">HOIUSTAMINE</button>
     </div>
 
 
@@ -64,38 +67,57 @@ export default {
       selectedBrandId: 0,
       brands: [
         {
-          brandId: 0,
+          brandNameId: 0,
           brandName: '',
           brandIsOther: false,
         }
       ]
     }
+
   },
 
   methods: {
-    clickable() {
-
-    },
-
 
     getBrandsSelectBoxInfo: function () {
-      this.$http.get("/order/brand")
-          .then(result => {
-            this.brands = result.data
+      this.$http.get("https://stoplight.io/mocks/toots/myproject/112994102/order/brand")
+          .then(response => {
+            this.brands = response.data
           })
           .catch(error => {
-            alert('error')
             console.log(error)
           });
     },
+
     clickSelectBrandEvent: function () {
       this.$emit('clickSelectBrandEvent', this.selectedBrandId)
     },
 
+
+
+
+    navigateToRepair: function () {
+      this.$router.push({
+        name: 'repairRoute'
+      });
+    },
+
+    navigateToMaintenance: function () {
+      this.$router.push({
+        name: 'maintenanceRoute'
+      });
+    },
+
+    navigateToStorage: function () {
+      this.$router.push({
+        name: 'storageRoute'
+      })
+    }
   },
+
   beforeMount() {
     this.getBrandsSelectBoxInfo()
   }
 }
+
 </script>
 
