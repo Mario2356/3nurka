@@ -10,7 +10,7 @@
         <select v-on:change="clickSelectBrandEvent" v-model="selectedBrandId" class="form-select"
                 aria-label="Default select example">
           <option selected disabled value="0">--Ratta mark--</option>
-          <option v-for="brand in brands" :key="brand.brandNameId" :value="brand.brandNameId">
+          <option v-for="brand in brands" :key="brand.brandId" :value="brand.brandId">
             {{ brand.brandName }}
           </option>
         </select>
@@ -67,7 +67,7 @@ export default {
       selectedBrandId: 0,
       brands: [
         {
-          brandNameId: 0,
+          brandId: 0,
           brandName: '',
           brandIsOther: false,
         }
@@ -79,7 +79,7 @@ export default {
   methods: {
 
     getBrandsSelectBoxInfo: function () {
-      this.$http.get("https://stoplight.io/mocks/toots/myproject/112994102/order/brand")
+      this.$http.get("/order/brand")
           .then(response => {
             this.brands = response.data
           })
