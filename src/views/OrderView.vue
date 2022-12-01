@@ -1,21 +1,20 @@
 <template>
   <div>
 
+    <div class="row align-content-start btn-group-vertical">
+      <button type="button" class="btn btn-success">Minu teenused</button>
+      <button type="button" class="btn btn-success">Minu profiil</button>
+    </div>
+
+
     <div class="row m-5 mb-3">
       <h5>Vali rippmenüüst ratta mark, märgi ka ratta mudel või kirjeldus</h5>
     </div>
 
 
-    <div class="text-start row-cols-6">
-      <div class="col">
-      <button class="btn btn-success">Minu teenused</button>
-      <button class="btn btn-success">Minu profiil</button>
-    </div>
-  </div>
 
     <div class="row align-items-end justify-content-center">
       <div class="col-3">
-
         <select v-on:change="clickSelectBrandEvent" v-model="selectedBrandId" class="form-select"
                 aria-label="Default select example">
           <option selected disabled value="0">--Ratta mark--</option>
@@ -26,13 +25,15 @@
       </div>
       <div class="col-3">
         <label for="Input"></label>
-        <input v-model="bikeRequest.model" class="form-control" placeholder="Ratta mudel/kirjeldus">
+        <input v-model="bikeRequest.bikeModel" class="form-control" placeholder="Ratta mudel/kirjeldus">
       </div>
     </div>
+
 
     <div class="m-5">
       <button v-on:click="addBike" class="btn btn-outline-dark">Lisa ratas valikusse</button>
     </div>
+
 
 
     <div class="row justify-content-center m-5">
@@ -45,14 +46,16 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <th scope="row">"</th>
-            <td></td>
+          <tr v-for="bike in bikeResponse">
+            <th scope="row">{{bike.brandName}}</th>
+            <td>{{bike.bikeModel}}</td>
           </tr>
           </tbody>
         </table>
       </div>
     </div>
+
+
 
     <div class="justify-content-center">
       <button v-on:click="navigateToRepair" class=" btn btn-outline-success btn-lg m-5">REMONT</button>
@@ -85,15 +88,18 @@ export default {
       ],
 
       bikeRequest: {
+        userId: 0,
         brandId: 0,
         brandName: '',
-        model: ''
+        bikeModel: ''
       },
 
       bikeResponse: {
+        bikeId: 0,
+        userId: 0,
         brandId: 0,
         brandName: '',
-        model: ''
+        bikeModel: '',
 
       }
     }
@@ -117,6 +123,8 @@ export default {
 
     addBike: function () {
       this.$http.post("/order/bike", this.bikeRequest
+
+
       ).then(response => {
         console.log(response.data)
       }).catch(error => {
@@ -124,6 +132,18 @@ export default {
       })
     },
 
+    getBike: function () {
+      this.$http.get("/order/bike", {
+        params: {
+          userId: this.userId
+        }
+      }).then(response => {
+            this.bikeResponse = response.data
+          })
+          .catch(error => {
+            console.log(error)
+          })
+    },
 
     navigateToRepair: function () {
       this.$router.push({
