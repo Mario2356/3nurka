@@ -101,7 +101,7 @@ export default {
 
           } else {
             this.$router.push({
-              name: 'customerHomeRoute', query: {
+              name: 'orderRoute', query: {
                 userId: this.loginResponse.userId,
                 roleName: this.loginResponse.roleType
               }
@@ -118,6 +118,8 @@ export default {
     }
 
   },
+
+
 
 
 }

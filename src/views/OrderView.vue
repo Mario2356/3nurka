@@ -1,16 +1,16 @@
 <template>
-  <div>
+  <div class="row justify-content-center">
 
-    <div class="row align-content-start btn-group-vertical">
-      <button type="button" class="btn btn-success">Minu teenused</button>
-      <button type="button" class="btn btn-success">Minu profiil</button>
+    <div class="row align-items-start ms-3 mt-5">
+      <div class="col btn-group-vertical align-content-lg-start col-lg-2 mt-5">
+       <button type="button" class="btn btn-success mb-3">Minu teenused</button>
+       <button type="button" class="btn btn-success">Minu profiil</button>
+      </div>
     </div>
 
-
-    <div class="row m-5 mb-3">
+    <div class="col-lg-6 justify-content-center">
       <h5>Vali rippmenüüst ratta mark, märgi ka ratta mudel või kirjeldus</h5>
     </div>
-
 
 
     <div class="row align-items-end justify-content-center">
@@ -35,7 +35,6 @@
     </div>
 
 
-
     <div class="row justify-content-center m-5">
       <div class="col-lg-5">
         <table class="table table-bordered">
@@ -47,14 +46,13 @@
           </thead>
           <tbody>
           <tr v-for="bike in bikeResponse">
-            <th scope="row">{{bike.brandName}}</th>
-            <td>{{bike.bikeModel}}</td>
+            <th scope="row">{{ bike.brandName }}</th>
+            <td>{{ bike.bikeModel }}</td>
           </tr>
           </tbody>
         </table>
       </div>
     </div>
-
 
 
     <div class="justify-content-center">
@@ -89,19 +87,22 @@ export default {
 
       bikeRequest: {
         userId: 0,
-        brandId: 0,
         brandName: '',
-        bikeModel: ''
+        bikeModel: '',
+        brandId: 0
       },
 
       bikeResponse: {
         bikeId: 0,
-        userId: 0,
         brandId: 0,
         brandName: '',
         bikeModel: '',
+      },
+
+      bikeInfo: {
 
       }
+
     }
   },
 
@@ -122,7 +123,9 @@ export default {
     },
 
     addBike: function () {
-      this.$http.post("/order/bike", this.bikeRequest
+      this.bikeRequest.userId = this.userId
+      this.bikeRequest.brandId = this.selectedBrandId
+      this.$http.post("/order/brand", this.bikeRequest
 
 
       ).then(response => {
@@ -132,14 +135,15 @@ export default {
       })
     },
 
+
     getBike: function () {
       this.$http.get("/order/bike", {
         params: {
           userId: this.userId
         }
       }).then(response => {
-            this.bikeResponse = response.data
-          })
+        this.bikeResponse = response.data
+      })
           .catch(error => {
             console.log(error)
           })
