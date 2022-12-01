@@ -36,7 +36,7 @@
         <div class="row">*kohustuslikud väljad</div>
         <div class="col-5">
           <div class="row input-group mb-3">
-            <button v-on:click="addCustomer" type="button" class="btn btn-success">Loo konto</button>
+            <button v-on:click="addCustomer()" type="button" class="btn btn-success">Loo konto</button>
           </div>
 
         </div>
@@ -90,6 +90,7 @@ export default {
         console.log(error)
       })
     },
+
   }
 }
 </script>
