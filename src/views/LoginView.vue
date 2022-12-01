@@ -11,7 +11,7 @@
                    aria-describedby="inputGroup-sizing-default">
           </div>
 
-          <div class="row input-group mb-4">
+          <div class="row input-group align-items-center mb-4">
             <span class="input-group-text" id="inputGroup-sizing-default">Parool</span>
             <input v-model="password" type="text" class="form-control" aria-label="Sizing example input"
                    aria-describedby="inputGroup-sizing-default">
@@ -101,7 +101,7 @@ export default {
 
           } else {
             this.$router.push({
-              name: 'customerHomeRoute', query: {
+              name: 'orderRoute', query: {
                 userId: this.loginResponse.userId,
                 roleName: this.loginResponse.roleType
               }
@@ -118,6 +118,8 @@ export default {
     }
 
   },
+
+
 
 
 }
