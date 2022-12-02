@@ -87,7 +87,6 @@ export default {
 
       bikeRequest: {
         userId: 0,
-        brandName: '',
         bikeModel: '',
         brandId: 0
       },

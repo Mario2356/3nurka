@@ -99,7 +99,7 @@ export default {
           } else {
             sessionStorage.setItem('userId', this.loginResponse.userId);
             this.$router.push({
-              name: 'customerHomeRoute'
+              name: 'orderRoute'
             })
           }
         }).catch(error => {
