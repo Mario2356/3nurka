@@ -76,7 +76,7 @@ export default {
   data: function () {
     return {
       selectedBrandId: 0,
-      userId: sessionStorage.getItem('userId'),
+      userId: Number( sessionStorage.getItem('userId')),
       brands: [
         {
           brandId: 0,
@@ -124,10 +124,12 @@ export default {
     addBike: function () {
       this.bikeRequest.userId = this.userId
       this.bikeRequest.brandId = this.selectedBrandId
-      this.$http.post("/order/brand", this.bikeRequest
+      this.$http.post("/order/bike", this.bikeRequest
 
 
       ).then(response => {
+        //Todo vaja käivitada teenus getAllUserBikes
+
         console.log(response.data)
       }).catch(error => {
         console.log(error)
