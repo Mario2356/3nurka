@@ -97,11 +97,9 @@ export default {
             });
 
           } else {
+            sessionStorage.setItem('userId', this.loginResponse.userId);
             this.$router.push({
-              name: 'orderRoute', query: {
-                userId: this.loginResponse.userId,
-                roleName: this.loginResponse.roleType
-              }
+              name: 'customerHomeRoute'
             })
           }
         }).catch(error => {

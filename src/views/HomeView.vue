@@ -39,7 +39,7 @@
               siis laste, linna, maastiku, võistluste, mäestlaskumis, elektri, tõukeratas. </p>
           </div>
           <div class="p-3">
-            <a href="#/order" class="btn col-lg-6 btn-success">Telli remont</a>
+            <a v-on:click="clickNavigateToNextPage" class="btn col-lg-6 btn-success">Telli remont</a>
           </div>
         </div>
 
@@ -55,7 +55,7 @@
               pikeneb selle eluiga vähemalt 5 korda!</p>
           </div>
           <div class="p-3">
-            <a href="/order" class="btn col-lg-6 btn-success">Telli hooldus</a>
+            <a v-on:click="clickNavigateToNextPage" class="btn col-lg-6 btn-success">Telli hooldus</a>
           </div>
         </div>
       </div>
@@ -69,7 +69,7 @@
               turvalisse lattu.</p><p> Tasuta transport lattu ja tagasi 1 kord aastas Tallinnas.</p>
           </div>
           <div class="p-3">
-            <a href="/order" class="btn col-lg-6 btn-success">Telli hoiustamine</a>
+            <a v-on:click="clickNavigateToNextPage" class="btn col-lg-6 btn-success">Telli hoiustamine</a>
           </div>
         </div>
 
@@ -86,7 +86,21 @@
 
 export default {
   name: 'HomeView',
-  components: {
+  data: function () {
+    return {
+      userId: sessionStorage.getItem('userId')
+    }
+
+  },
+  methods: {
+    clickNavigateToNextPage: function () {
+      if (this.userId == null) {
+        this.$router.push({name:'loginRoute'})
+      } else {
+        this.$router.push({name:'orderRoute'})
+      }
+
+    }
   }
 }
 </script>
