@@ -204,6 +204,12 @@ export default {
         console.log(error)
       })
     },
+    logout: function () {
+      sessionStorage.clear()
+      this.$router.push({
+        path: '/'
+      })
+    }
 
   },
   beforeMount() {
