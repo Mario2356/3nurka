@@ -1,10 +1,11 @@
 <template>
   <div class="row justify-content-center">
 
-    <div class="row align-items-start ms-3 mt-5">
+    <div class="row align-items-start ps-5 ms-5 mt-5">
       <div class="col btn-group-vertical align-content-lg-start col-lg-2 mt-5">
        <button type="button" class="btn btn-success mb-3">Minu teenused</button>
-       <button type="button" class="btn btn-success">Minu profiil</button>
+       <button type="button" class="btn btn-success mb-3">Minu profiil</button>
+        <button v-on:click="logout" type="button" class="btn btn-success">Logi välja</button>
       </div>
     </div>
 
@@ -96,10 +97,6 @@ export default {
         brandId: 0,
         brandName: '',
         bikeModel: '',
-      },
-
-      bikeInfo: {
-
       }
 
     }
@@ -129,7 +126,7 @@ export default {
 
       ).then(response => {
         //Todo vaja käivitada teenus getAllUserBikes
-
+      this.getBike();
         console.log(response.data)
       }).catch(error => {
         console.log(error)
@@ -166,12 +163,22 @@ export default {
       this.$router.push({
         name: 'storageRoute'
       })
+    },
+
+    logout: function () {
+      sessionStorage.clear()
+      this.$router.push({
+        path: '/'
+      })
     }
+
   },
 
   beforeMount() {
     this.getBrandsSelectBoxInfo()
+    this.getBike()
   }
+
 }
 
 </script>

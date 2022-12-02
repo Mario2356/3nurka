@@ -85,6 +85,7 @@ export default {
         this.registerResponse = response.data
         sessionStorage.setItem('userId', this.registerResponse.userId)
         // push edasi
+        this.$router.push({name: 'orderRoute'})
 
       }).catch(error => {
         console.log(error)
