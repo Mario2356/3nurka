@@ -1,13 +1,145 @@
 <template>
-  <di>
+  <div class="container">
 
-  </di>
+    <div class="row m-4">
+      <h5>Telli jalgrattale remont</h5>
+    </div>
+
+
+    <div class="row align-items-end justify-content-center m-3">
+      <div class="col-3">
+        <select v-model="selectedBikeId" class="form-select"
+                aria-label="Default select example">
+          <option selected disabled value="0">Minu ratas*</option>
+          <option v-for="bike in bikes" :key="bike.bikeId" :value="bike.bikeId">
+            {{ bike.brandName }}
+          </option>
+        </select>
+      </div>
+<!--            <div>{{bikeOrderRequestById.bikeId}}</div>-->
+      <div class="col-3">
+        <label for="exampleFormControlInput1"></label>
+        <input  v-model="bikeOrderRequestById.dateFrom" class="form-control" placeholder="Soovitud kohaletulemise kuupäev*">
+      </div>
+    </div>
+
+
+    <div class="row m-3 justify-content-center">
+
+      <div class="col-4">
+
+        <div class="row m-3">
+          <label for="floatingTextArea">Kirjelda remondi vajaduse põhjust</label>
+          <textarea class="form-control" placeholder="Probleemi kirjeldus" id="floatingTextArea"></textarea>
+        </div>
+
+        <div class="row m-3 mt-5">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <label class="form-check-label" for="flexRadioDefault1">
+              Kasuta profiiliaadressi
+            </label>
+          </div>
+        </div>
+
+        <div class="row m-3">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <label class="form-check-label" for="flexRadioDefault1">
+              Kasuta teist aadressi
+            </label>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="exampleFormControlInput1"></label>
+          <input class="form-control" placeholder="Tänava nimi ja maja/maja ja korteri number*">
+        </div>
+
+        <div class="row">
+          <select class="form-select" aria-label="Default select example">
+            <option selected>Tallinna linnaosa*</option>
+            <option value="Lasnamäe">
+              Linnaosa nimi
+            </option>
+          </select>
+        </div>
+
+        <div class="row">
+          <label for="exampleFormControlInput1"></label>
+          <input class="form-control" placeholder="Telefoninumber*">
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+
+      <div class="col-2">
+        <button v-on:click="" class="btn btn-outline-primary btn-lg m-4">Salvesta</button>
+        <button v-on:click="" class="btn btn-outline-primary btn-lg m-1">Muuda</button>
+      </div>
+
+      <div class="col-2">
+        <button v-on:click="" class=" btn btn-outline-success btn-lg m-4">Tagasi tellimislehele</button>
+      </div>
+
+    </div>
+  </div>
+
 
 </template>
 
 <script>
 export default {
-  name: "RepairView"
+  name: "RepairView",
+  data: function () {
+    return {
+      userId: sessionStorage.getItem('userId'),
+      selectedBikeId: 0,
+      bikes: [
+        {
+          bikeId: 0,
+          brandId: 0,
+          brandName: '',
+          model: ''
+        }
+      ],
+      bikeOrderRequestById: {
+        orderId: sessionStorage.getItem('orderId'),
+        bikeId: 0,
+        // todo: lehele tulemisel sessionStoragesse võtta workType!
+        workTypeId: sessionStorage.getItem('workType'),
+        // todo: data tüüp?
+        dateFrom: 0
+        // todo: dateTo??
+      }
+    }
+
+  },
+  methods: {
+    clickSelectBikeEvent: function () {
+      this.selectedBikeId = this.bikeOrderRequestById.bikeId
+
+    },
+
+    getBikesByUserId: function () {
+      this.$http.get("https://stoplight.io/mocks/liisr/esimeneprojekt/24191619/repair/bike", {
+            params: {
+              userId: this.userId
+            }
+          }
+      ).then(response => {
+        this.bikes = response.data
+      }).catch(error => {
+        console.log(error)
+      })
+    }
+
+  },
+  beforeMount() {
+    this.getBikesByUserId()
+  }
 }
 </script>
 

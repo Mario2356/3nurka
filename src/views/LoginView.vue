@@ -1,17 +1,18 @@
 <template>
   <div>
 
-    <div class="container mt-5">
-      <div class="row justify-content-start align-items-center">
-
+    <div class="container mt-5 p-5">
+      <div class="row justify-content-sm-center">
         <div class="col-4">
-          <div class="row input-group mb-4">
+
+          <div class="input-group mb-4">
             <span class="input-group-text" id="inputGroup-sizing-default">e-posti aadress</span>
             <input v-model="email" type="text" class="form-control" aria-label="Sizing example input"
                    aria-describedby="inputGroup-sizing-default">
           </div>
 
-          <div class="row input-group align-items-center mb-4">
+
+          <div class="input-group mb-4">
             <span class="input-group-text" id="inputGroup-sizing-default">Parool</span>
             <input v-model="password" type="text" class="form-control" aria-label="Sizing example input"
                    aria-describedby="inputGroup-sizing-default">
@@ -39,12 +40,8 @@
         </div>
 
 
-        <div class="col-7">
-          <div class="thumbnail">
-            <img class="img-responsive login-image" src="../assets/image_1.jpg" alt="image_1">
-            <div class="caption">
-            </div>
-          </div>
+        <div class="col-7 me-5 p-1">
+          <img src="../assets/image_1.jpg" alt="image_1" class="register-image">
         </div>
 
       </div>
@@ -100,11 +97,9 @@ export default {
             });
 
           } else {
+            sessionStorage.setItem('userId', this.loginResponse.userId);
             this.$router.push({
-              name: 'orderRoute', query: {
-                userId: this.loginResponse.userId,
-                roleName: this.loginResponse.roleType
-              }
+              name: 'orderRoute'
             })
           }
         }).catch(error => {
