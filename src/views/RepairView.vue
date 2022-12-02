@@ -41,6 +41,7 @@
           <textarea class="form-control" placeholder="Probleemi kirjeldus" id="floatingTextArea"></textarea>
         </div>
 
+
         <div class="row m-3 mt-5">
           <div class="form-check">
             <input v-on:click="showProfileAddress" class="form-check-input" type="radio"
@@ -50,6 +51,7 @@
             </label>
           </div>
         </div>
+
 
         <div class="row m-3">
           <div class="form-check">
@@ -202,6 +204,12 @@ export default {
         console.log(error)
       })
     },
+    logout: function () {
+      sessionStorage.clear()
+      this.$router.push({
+        path: '/'
+      })
+    }
 
   },
   beforeMount() {
