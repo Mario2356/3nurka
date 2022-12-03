@@ -20,7 +20,7 @@
                 aria-label="Default select example">
           <option selected disabled value="0">Minu ratas*</option>
           <option v-for="bike in bikes" :key="bike.bikeId" :value="bike.bikeId">
-            {{ bike.brandName }}
+            {{ bike.brandName + "-" + bike.bikeModel}}
           </option>
         </select>
       </div>
@@ -118,7 +118,7 @@
       </div>
 
       <div class="col-2">
-        <button v-on:click="" class=" btn btn-outline-success btn-lg m-4">Tagasi tellimislehele</button>
+        <button v-on:click="clickNavigateToOrderView" class=" btn btn-outline-success btn-lg m-4">Tagasi tellimislehele</button>
       </div>
 
     </div>
@@ -141,7 +141,7 @@ export default {
           bikeId: 0,
           brandId: 0,
           brandName: '',
-          model: ''
+          bikeModel: ''
         }
       ],
       bikeOrderRequestById: {
@@ -166,6 +166,10 @@ export default {
 
   },
   methods: {
+    clickNavigateToOrderView: function () {
+      this.$router.push({name: 'orderRoute'})
+
+    },
 
     showProfileAddress: function () {
       this.selectedAddress = 1;
@@ -193,7 +197,7 @@ export default {
     },
 
     getBikesByUserId: function () {
-      this.$http.get("https://stoplight.io/mocks/liisr/esimeneprojekt/24191619/repair/bike", {
+      this.$http.get("/order/bike", {
             params: {
               userId: this.userId
             }

@@ -3,8 +3,8 @@
 
     <div class="row align-items-start ps-5 ms-5 mt-5">
       <div class="col btn-group-vertical align-content-lg-start col-lg-2 mt-5">
-       <button type="button" class="btn btn-success mb-3">Minu teenused</button>
-       <button type="button" class="btn btn-success mb-3">Minu profiil</button>
+        <button type="button" class="btn btn-success mb-3">Minu teenused</button>
+        <button type="button" class="btn btn-success mb-3">Minu profiil</button>
         <button v-on:click="logout" type="button" class="btn btn-success">Logi välja</button>
       </div>
     </div>
@@ -57,7 +57,7 @@
 
 
     <div class="justify-content-center">
-      <button v-on:click="navigateToRepair" class=" btn btn-outline-success btn-lg m-5">REMONT</button>
+      <button v-on:click="startOrder" class=" btn btn-outline-success btn-lg m-5">REMONT</button>
       <button v-on:click="navigateToMaintenance" class="btn btn-outline-primary btn-lg m-5">HOOLDUS</button>
       <button v-on:click="navigateToStorage" class="btn btn-outline-warning btn-lg m-5">HOIUSTAMINE</button>
     </div>
@@ -76,8 +76,9 @@ export default {
 
   data: function () {
     return {
+      orderId: 0,
       selectedBrandId: 0,
-      userId: Number( sessionStorage.getItem('userId')),
+      userId: Number(sessionStorage.getItem('userId')),
       brands: [
         {
           brandId: 0,
@@ -97,6 +98,19 @@ export default {
         brandId: 0,
         brandName: '',
         bikeModel: '',
+      },
+
+      orderResponse: {
+        orderId: 0,
+        userId: 0,
+        statusName: '',
+        addressId: 0,
+        number: '',
+        dateFrom: '',
+        dateTo: '',
+        price: 0
+
+
       }
 
     }
@@ -122,11 +136,9 @@ export default {
       this.bikeRequest.userId = this.userId
       this.bikeRequest.brandId = this.selectedBrandId
       this.$http.post("/order/bike", this.bikeRequest
-
-
       ).then(response => {
         //Todo vaja käivitada teenus getAllUserBikes
-      this.getBike();
+        this.getBike();
         console.log(response.data)
       }).catch(error => {
         console.log(error)
@@ -147,10 +159,21 @@ export default {
           })
     },
 
-    navigateToRepair: function () {
-      this.$router.push({
-        name: 'repairRoute'
-      });
+
+    startOrder: function () {
+      this.$http.post("/order/start", null, {
+            params: {
+              userId: this.userId,
+            }
+          }
+      ).then(response => {
+        this.orderResponse = response.data
+        this.$router.push({
+          name: 'repairRoute'
+        });
+      }).catch(error => {
+        console.log(error)
+      })
     },
 
     navigateToMaintenance: function () {
