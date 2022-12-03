@@ -165,6 +165,7 @@ export default {
       this.$router.push({
         name: 'repairRoute'
       });
+      sessionStorage.setItem('workTypeId', '1')
       if (this.orderId == null) {
 
         this.$http.post("/order/start", null, {

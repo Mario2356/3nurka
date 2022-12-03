@@ -144,15 +144,18 @@ export default {
           bikeModel: ''
         }
       ],
-      bikeOrderRequestById: {
+      bikeOrderRequest: {
         orderId: sessionStorage.getItem('orderId'),
         bikeId: 0,
-        // todo: lehele tulemisel sessionStoragesse võtta workType!
         workTypeId: sessionStorage.getItem('workType'),
         // todo: data tüüp?
-        dateFrom: 0
-        // todo: dateTo??
+        bikeStatusId: 0,
+        packageFieldId: 0,
+        dateFrom: '',
+        dateTo: '',
+        customerComment: '',
       },
+
       selectedAddress: 0,
       address: [
         {
