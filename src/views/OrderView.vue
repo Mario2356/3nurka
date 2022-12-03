@@ -1,15 +1,15 @@
 <template>
-  <div class="row justify-content-center">
+  <div class="container">
 
-    <div class="row align-items-start ps-5 ms-5 mt-5">
+    <div class="row align-items-start ps-5 mt-5 ">
       <div class="col btn-group-vertical align-content-lg-start col-lg-2 mt-5">
-       <button type="button" class="btn btn-success mb-3">Minu teenused</button>
-       <button type="button" class="btn btn-success mb-3">Minu profiil</button>
+        <button type="button" class="btn btn-success mb-3">Minu teenused</button>
+        <button type="button" class="btn btn-success mb-3">Minu profiil</button>
         <button v-on:click="logout" type="button" class="btn btn-success">Logi välja</button>
       </div>
     </div>
 
-    <div class="col-lg-6 justify-content-center">
+    <div class="row m-4">
       <h5>Vali rippmenüüst ratta mark, märgi ka ratta mudel või kirjeldus</h5>
     </div>
 
@@ -51,8 +51,8 @@
             <th scope="row">{{ bike.brandName }}</th>
             <td>{{ bike.bikeModel }}</td>
 
-            <td> <i v-on:click="deleteBikeInfo(bike.bikeId)"
-              class="fa-solid fa-trash-o fa-trash-can"></i></td>
+            <td><i v-on:click="deleteBikeInfo(bike.bikeId)"
+                   class="fa-solid fa-trash-o fa-trash-can"></i></td>
           </tr>
           </tbody>
         </table>
@@ -81,7 +81,7 @@ export default {
   data: function () {
     return {
       selectedBrandId: 0,
-      userId: Number( sessionStorage.getItem('userId')),
+      userId: Number(sessionStorage.getItem('userId')),
       brands: [
         {
           brandId: 0,
@@ -121,8 +121,6 @@ export default {
     },
 
 
-
-
     // deleteBikeInfo: function (bikeId) {
     //   this.$http.put("/order/bike", null, {
     //         params: {
@@ -155,12 +153,10 @@ export default {
       this.bikeRequest.userId = this.userId
       this.bikeRequest.brandId = this.selectedBrandId
       this.$http.post("/order/bike", this.bikeRequest
-
-
       ).then(response => {
         //Todo vaja käivitada teenus getAllUserBikes
 
-      this.getBike();
+        this.getBike();
         console.log(response.data)
       }).catch(error => {
         console.log(error)

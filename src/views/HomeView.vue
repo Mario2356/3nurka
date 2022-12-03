@@ -27,12 +27,12 @@
 
 
 
-    <div class="row row-cols-1 row-cols-md-3 m-b card-deck">
+    <div class="row row-cols-1 row-cols-md-3 card-deck ps-5 pe-5">
       <div class="col justify-content-center">
-        <div class="card h-100 ">
+        <div class="card h-100">
           <img src="../assets/image_2.jpg" class="card-img-top" alt="image_2">
           <div class="card-body">
-            <h4 class="card-title pt-5 mb-4">REMONT</h4>
+            <h4 class="card-title mt-3 mb-4">REMONT</h4>
             <p class="card-text">Saad enda kaherattalise sõbra kiirelt korda, ilma ratast pikalt hoiule andmata.
               Meie mehaanik tuleb Tallinna piires millal ja kuhu soovid.</p>
             <p>Remonditud saavad ükskõik, mis tüüpi jalgrattad! Olgu selleks
@@ -44,15 +44,14 @@
         </div>
 
       </div>
-      <div class="col">
+      <div class="col justify-content-center">
         <div class="card h-100">
           <img src="../assets/image_4.jpg" class="card-img-top" alt="image_4">
           <div class="card-body">
-            <h4 class="card-title pt-5 mb-4">HOOLDUS</h4>
+            <h4 class="card-title mt-3 mb-4">HOOLDUS</h4>
             <p class="card-text">Jalgratast on mõistlik kontrollida ja hooldada enne sõiduhooaja algust ning sõiduhooaja lõpus.
               Enne ratta talvepuhkusele saatmist tuleks ratas korralikult puhastada.</p>
-            <p>Ratta kasutuselevõtt on palju kergem kevadel, kui sügisene hooldus on tehtud õigel ajal. Ratast hooldades
-              pikeneb selle eluiga vähemalt 5 korda!</p>
+            <p>Ratast korrapäraselt kevadel ja sügisel hooldades pikeneb selle eluiga vähemalt 5 korda!</p>
           </div>
           <div class="p-3">
             <a v-on:click="clickNavigateToNextPage" class="btn col-lg-6 btn-success">Telli hooldus</a>
@@ -63,13 +62,13 @@
         <div class="card h-100">
           <img src="../assets/image_3.jpg" class="card-img-top" alt="image_3">
           <div class="card-body">
-            <h4 class="card-title pt-5 mb-4 ">HOIUSTAMINE</h4>
+            <h4 class="card-title mt-3 mb-4">HOIUSTAMINE</h4>
             <p class="card-text"> Kuhu panna pere rattad külmaperioodiks hoiule?</p>
-            <p>Saada jalgrattad ja kogu varustus talveperioodiks
+            <p>Saada jalgrattad ja kogu varustus talveks
               turvalisse lattu.</p><p> Tasuta transport lattu ja tagasi 1 kord aastas Tallinnas.</p>
           </div>
           <div class="p-3">
-            <a v-on:click="clickNavigateToNextPage" class="btn col-lg-6 btn-success">Telli hoiustamine</a>
+            <a v-on:click="clickNavigateToNextPage" class="btn col-lg-7 btn-success">Telli hoiustamine</a>
           </div>
         </div>
 

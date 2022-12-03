@@ -1,30 +1,29 @@
 <template>
   <div>
 
-    <div class="container mt-5 p-5">
-      <div class="row justify-content-sm-center">
-        <div class="col-4">
+    <div class="container mt-5">
+      <div class="row justify-content-around">
+        <div class="col-md-4">
 
-          <div class="input-group mb-4">
-            <span class="input-group-text" id="inputGroup-sizing-default">e-posti aadress</span>
+          <div class="input-group ms-3 mt-5 pt-5 mb-4">
+            <span class="input-group-text input-width" id="inputGroup-sizing-default">e-posti aadress</span>
             <input v-model="email" type="text" class="form-control" aria-label="Sizing example input"
                    aria-describedby="inputGroup-sizing-default">
           </div>
 
 
-          <div class="input-group mb-4">
-            <span class="input-group-text" id="inputGroup-sizing-default">Parool</span>
+          <div class="input-group ms-3">
+            <span class="input-group-text input-width" id="inputGroup-sizing-default w-75">Parool</span>
             <input v-model="password" type="text" class="form-control" aria-label="Sizing example input"
                    aria-describedby="inputGroup-sizing-default">
           </div>
 
-
-          <div class="col-5">
-            <div class="row input-group mb-3">
+          <div class="col-7 ps-5 mt-5">
+            <div class="row input-group ms-5 mb-3">
               <button v-on:click="login" type="button" class="btn btn-success">Logi sisse</button>
             </div>
 
-            <div class="row input-group mb-3">
+            <div class="row input-group ms-5 mb-3">
               <button v-on:click="goToRegister" type="button" class="btn btn-success">Loo uus konto</button>
             </div>
 
@@ -40,7 +39,7 @@
         </div>
 
 
-        <div class="col-7 me-5 p-1">
+        <div class="col-sm-6 pt-5 pb-5 ms-1 mb-5">
           <img src="../assets/image_1.jpg" alt="image_1" class="register-image">
         </div>
 

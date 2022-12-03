@@ -1,7 +1,7 @@
 <template>
   <div class="container">
 
-    <div class="row align-items-start ps-5 ms-5 mt-5">
+    <div class="row align-items-start ps-5 mt-5">
       <div class="col btn-group-vertical align-content-lg-start col-lg-2 mt-5">
         <button type="button" class="btn btn-success mb-3">Minu teenused</button>
         <button type="button" class="btn btn-success mb-3">Minu profiil</button>
