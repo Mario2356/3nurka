@@ -1,16 +1,17 @@
 <template>
   <div class="container">
 
-    <div class="row align-items-start ps-5 mt-5 ">
-      <div class="col btn-group-vertical align-content-lg-start col-lg-2 mt-5">
+    <div class="row align-content-around mt-5 align-text-bottom">
+      <div class="col-md-9 btn-group-vertical align-content-lg-start col-lg-2 mt-5 d-inline">
         <button type="button" class="btn btn-success mb-3">Minu teenused</button>
         <button type="button" class="btn btn-success mb-3">Minu profiil</button>
         <button v-on:click="logout" type="button" class="btn btn-success">Logi välja</button>
       </div>
-    </div>
+      <div class="row col-lg-8 align-items-center background-dark ms-2 mt-5 pt-5">
+        <p><h4>TELLIMUSE VORMISTAMINE</h4>
+        <p><h6>Vali rippmenüüst ratta mark ja märgi ära ratta mudel või kirjeldus</h6>
+      </div>
 
-    <div class="row m-4">
-      <h5>Vali rippmenüüst ratta mark, märgi ka ratta mudel või kirjeldus</h5>
     </div>
 
 
@@ -52,7 +53,7 @@
             <td>{{ bike.bikeModel }}</td>
 
             <td><i v-on:click="deleteBikeInfo(bike.bikeId)"
-                   class="fa-solid fa-trash-o fa-trash-can"></i></td>
+                   class="fa-solid fa-flag fa-trash-can"></i></td>
           </tr>
           </tbody>
         </table>

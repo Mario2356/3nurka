@@ -14,7 +14,7 @@
 
           <div class="input-group ms-3">
             <span class="input-group-text input-width" id="inputGroup-sizing-default w-75">Parool</span>
-            <input v-model="password" type="text" class="form-control" aria-label="Sizing example input"
+            <input v-model="password" type="password" class="form-control" aria-label="Sizing example input"
                    aria-describedby="inputGroup-sizing-default">
           </div>
 

@@ -69,7 +69,10 @@ nav a {
 .input-width {
     width: 140px;
 }
-
+.fa-flag:hover {
+    color: red;
+    cursor: pointer;
+}
 
 
 
