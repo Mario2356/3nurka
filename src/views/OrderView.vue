@@ -43,12 +43,15 @@
           <tr>
             <th scope="col">Ratas</th>
             <th scope="col">Ratta mudel/kirjeldus</th>
+            <th scope="col"></th>
           </tr>
           </thead>
           <tbody>
           <tr v-for="bike in bikeResponse">
             <th scope="row">{{ bike.brandName }}</th>
             <td>{{ bike.bikeModel }}</td>
+
+            <td><button v-on:click="deleteBike(bike.bikeId)" class=" btn btn-outline-success btn-lg m-5">REMONT</button></td>
           </tr>
           </tbody>
         </table>
@@ -98,12 +101,24 @@ export default {
         brandName: '',
         bikeModel: '',
       }
-
     }
   },
 
   methods: {
+    deleteBike: function (bikeId) {
 
+      this.$http.put("/order/bike", null, {
+            params: {
+              bikeId: bikeId
+            }
+          }
+      ).then(response => {
+        this.getBike()
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
     getBrandsSelectBoxInfo: function () {
       this.$http.get("/order/brand")
           .then(response => {
