@@ -43,7 +43,7 @@
           <tr>
             <th scope="col">Ratas</th>
             <th scope="col">Ratta mudel/kirjeldus</th>
-            <th scope="col"></th>
+            <th scope="col">Kustuta valikust</th>
           </tr>
           </thead>
           <tbody>
@@ -51,7 +51,8 @@
             <th scope="row">{{ bike.brandName }}</th>
             <td>{{ bike.bikeModel }}</td>
 
-            <td><button v-on:click="deleteBikeInfo(bike.bikeId)" class=" btn btn-outline-danger btn-sm">kustuta</button></td>
+            <td> <i v-on:click="deleteBikeInfo(bike.bikeId)"
+              class="fa-solid fa-trash-o fa-trash-can"></i></td>
           </tr>
           </tbody>
         </table>
@@ -106,9 +107,9 @@ export default {
 
   methods: {
     deleteBikeInfo: function (bikeId) {
-      this.$http.put("/order/bike", null, {
+      this.$http.delete("/order/bike", {
             params: {
-              bikeId: bikeId
+              bikeId: bikeId,
             }
           }
       ).then(response => {
@@ -118,6 +119,23 @@ export default {
         console.log(error)
       })
     },
+
+
+
+
+    // deleteBikeInfo: function (bikeId) {
+    //   this.$http.put("/order/bike", null, {
+    //         params: {
+    //           bikeId: bikeId
+    //         }
+    //       }
+    //   ).then(response => {
+    //     this.getBike()
+    //     console.log(response.data)
+    //   }).catch(error => {
+    //     console.log(error)
+    //   })
+    // },
 
     getBrandsSelectBoxInfo: function () {
       this.$http.get("/order/brand")

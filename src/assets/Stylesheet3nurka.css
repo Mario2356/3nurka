@@ -67,6 +67,10 @@ nav a {
 .register-image {
     width:800px
 }
+.fa-trash-o:hover{
+    color: red;
+    cursor: pointer;
+}
 
 
 
