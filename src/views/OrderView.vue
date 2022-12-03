@@ -57,7 +57,7 @@
 
 
     <div class="justify-content-center">
-      <button v-on:click="startOrder" class=" btn btn-outline-success btn-lg m-5">REMONT</button>
+      <button v-on:click="clickToRepairEvent" class=" btn btn-outline-success btn-lg m-5">REMONT</button>
       <button v-on:click="navigateToMaintenance" class="btn btn-outline-primary btn-lg m-5">HOOLDUS</button>
       <button v-on:click="navigateToStorage" class="btn btn-outline-warning btn-lg m-5">HOIUSTAMINE</button>
     </div>
@@ -76,7 +76,7 @@ export default {
 
   data: function () {
     return {
-      orderId: 0,
+      orderId: sessionStorage.getItem('orderId'),
       selectedBrandId: 0,
       userId: Number(sessionStorage.getItem('userId')),
       brands: [
@@ -103,7 +103,8 @@ export default {
       orderResponse: {
         orderId: 0,
         userId: 0,
-        statusName: '',
+        orderStatusId: 0,
+        orderStatusName: '',
         addressId: 0,
         number: '',
         dateFrom: '',
@@ -160,20 +161,25 @@ export default {
     },
 
 
-    startOrder: function () {
-      this.$http.post("/order/start", null, {
-            params: {
-              userId: this.userId,
+    clickToRepairEvent: function () {
+      this.$router.push({
+        name: 'repairRoute'
+      });
+      if (this.orderId == null) {
+
+        this.$http.post("/order/start", null, {
+              params: {
+                userId: this.userId,
+              }
             }
-          }
-      ).then(response => {
-        this.orderResponse = response.data
-        this.$router.push({
-          name: 'repairRoute'
-        });
-      }).catch(error => {
-        console.log(error)
-      })
+        ).then(response => {
+          this.orderResponse = response.data
+          sessionStorage.setItem('orderId', this.orderResponse.orderId);
+
+        }).catch(error => {
+          console.log(error)
+        })
+      }
     },
 
     navigateToMaintenance: function () {
