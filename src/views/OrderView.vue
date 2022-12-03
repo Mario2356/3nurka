@@ -51,7 +51,7 @@
             <th scope="row">{{ bike.brandName }}</th>
             <td>{{ bike.bikeModel }}</td>
 
-            <td><button v-on:click="deleteBike(bike.bikeId)" class=" btn btn-outline-success btn-lg m-5">REMONT</button></td>
+            <td><button v-on:click="deleteBikeInfo(bike.bikeId)" class=" btn btn-outline-danger btn-sm">kustuta</button></td>
           </tr>
           </tbody>
         </table>
@@ -105,8 +105,7 @@ export default {
   },
 
   methods: {
-    deleteBike: function (bikeId) {
-
+    deleteBikeInfo: function (bikeId) {
       this.$http.put("/order/bike", null, {
             params: {
               bikeId: bikeId
@@ -119,6 +118,7 @@ export default {
         console.log(error)
       })
     },
+
     getBrandsSelectBoxInfo: function () {
       this.$http.get("/order/brand")
           .then(response => {
@@ -141,6 +141,7 @@ export default {
 
       ).then(response => {
         //Todo vaja käivitada teenus getAllUserBikes
+
       this.getBike();
         console.log(response.data)
       }).catch(error => {
