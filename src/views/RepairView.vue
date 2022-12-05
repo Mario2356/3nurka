@@ -26,7 +26,7 @@
       </div>
       <div class="col-3">
         <label for="exampleFormControlInput1"></label>
-        <input  v-model="bikeOrderRequest.dateFrom" class="form-control" placeholder="Soovitud kohaletulemise kuupäev*">
+        <input type="date" v-model="bikeOrderRequest.dateFrom" class="form-control" placeholder="Soovitud kohaletulemise kuupäev*">
       </div>
     </div>
 
@@ -145,14 +145,13 @@ export default {
       ],
       bikeOrderRequest: {
         orderId: sessionStorage.getItem('orderId'),
-        bikeId: '',
+        bikeId: '0',
         workTypeId: sessionStorage.getItem('workTypeId'),
-        // todo: data tüüp?
-        bikeStatusId: 0,
         packageFieldId: 0,
         dateFrom: '',
         dateTo: '',
         customerComment: '',
+        techComment:''
       },
 
       selectedAddress: 0,

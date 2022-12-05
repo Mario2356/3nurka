@@ -60,6 +60,29 @@
       </div>
     </div>
 
+    <div class="row justify-content-center m-5">
+      <div class="col-lg-5">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th scope="col">Teenus</th>
+            <th scope="col">Ratta mark</th>
+            <th scope="col">Ratta mudel</th>
+            <th scope="col">Probleemi kirjeldus</th>
+            <th scope="col">Hoiustamise lõpukuupäev</th>
+            <th scope="col">Valitud pakett</th>
+            <th scope="col">Teenuse hind</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="bikeOrder in bikeOrderResponse" :key="bikeOrder.bikeOrderId">
+            <td>{{ bikeOrder.bikeModel }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
 <!-- ALERT MESSAGE - HETKEL EI TÖÖTA -->
 
 <!--    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
