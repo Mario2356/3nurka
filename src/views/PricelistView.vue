@@ -87,7 +87,8 @@
       <div class="col">
         <div class="card h-100 text">
           <div class="card-body">
-            <h5 class="mt-5 mb-3"><strong>PAKETT - KÄIGUD, KETT JA PIDURID</strong></h5>
+            <h5 class="mt-5"><strong>PAKETT - </strong></h5>
+            <h5 class="mb-3"> <strong>KÄIGUD, KETT JA PIDURID: 40€ </strong></h5>
             <div class="card-text ms-3 text-start justify-content-center">
               <ul class="list-group ms-3 text-start">
                 <li>Piduri reguleerimine</li>
