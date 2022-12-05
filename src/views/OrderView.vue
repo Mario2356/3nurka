@@ -53,30 +53,30 @@
             <td>{{ bike.bikeModel }}</td>
 
 
-            <td><i class="fa-solid fa-flag fa-trash-can" data-bs-toggle="modal" data-bs-target="#exampleModal"></i></td>
+            <td><i v-on:click="deleteBikeInfo(bike.bikeId)" class="fa-solid fa-flag fa-trash-can" data-bs-toggle="modal" data-bs-target="#exampleModal"></i></td>
           </tr>
           </tbody>
         </table>
       </div>
     </div>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Kas soovid selle ratta kustutada?</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-fullscreen-sm-down">
-          </div>
-          <div class="modal-footer">
-            <button v-on:click="deleteBikeInfo(bike.bikeId)" class="btn btn-success" type="button">Jah</button>
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Ei</button>
+<!--    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--      <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--          <div class="modal-header">-->
+<!--            <h1 class="modal-title fs-5" id="exampleModalLabel">Kas soovid selle ratta kustutada?</h1>-->
+<!--            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--          </div>-->
+<!--          <div class="modal-fullscreen-sm-down">-->
+<!--          </div>-->
+<!--          <div class="modal-footer">-->
+<!--            <button v-on:click="deleteBikeInfo(bike.bikeId)" class="btn btn-success" type="button">Jah</button>-->
+<!--            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Ei</button>-->
 
-          </div>
-        </div>
-      </div>
-    </div>
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
     
 
 
@@ -163,6 +163,7 @@ export default {
       this.$http.get("/order/brand")
           .then(response => {
             this.brands = response.data
+            console.log('Mina olen siin')
           })
           .catch(error => {
             console.log(error)
