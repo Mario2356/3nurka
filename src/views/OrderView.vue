@@ -83,27 +83,24 @@
       </div>
     </div>
 
-<!-- ALERT MESSAGE - HETKEL EI TÖÖTA -->
+    <!-- ALERT MESSAGE - HETKEL EI TÖÖTA -->
 
-<!--    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-<!--      <div class="modal-dialog">-->
-<!--        <div class="modal-content">-->
-<!--          <div class="modal-header">-->
-<!--            <h1 class="modal-title fs-5" id="exampleModalLabel">Kas soovid selle ratta kustutada?</h1>-->
-<!--            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--          </div>-->
-<!--          <div class="modal-fullscreen-sm-down">-->
-<!--          </div>-->
-<!--          <div class="modal-footer">-->
-<!--            <button v-on:click="deleteBikeInfo(bike.bikeId)" class="btn btn-success" type="button">Jah</button>-->
-<!--            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Ei</button>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-
-
-
+    <!--    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+    <!--      <div class="modal-dialog">-->
+    <!--        <div class="modal-content">-->
+    <!--          <div class="modal-header">-->
+    <!--            <h1 class="modal-title fs-5" id="exampleModalLabel">Kas soovid selle ratta kustutada?</h1>-->
+    <!--            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+    <!--          </div>-->
+    <!--          <div class="modal-fullscreen-sm-down">-->
+    <!--          </div>-->
+    <!--          <div class="modal-footer">-->
+    <!--            <button v-on:click="deleteBikeInfo(bike.bikeId)" class="btn btn-success" type="button">Jah</button>-->
+    <!--            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Ei</button>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
 
 
     <div class="justify-content-center">
@@ -112,9 +109,72 @@
       <button v-on:click="navigateToStorage" class="btn btn-outline-warning btn-lg m-5">HOIUSTAMINE</button>
     </div>
 
+    <div class="row justify-content-center">
+      <div class="col-3">
+        <div class="form-check">
+          <input v-on:click="showProfileAddress" class="form-check-input" type="radio"
+                 name="flexRadioDefault" id="flexRadioDefault1">
+          <label class="form-check-label" for="flexRadioDefault1">
+            Kasuta profiiliaadressi
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input v-on:click="showCustomAddress" class="form-check-input" type="radio"
+                 name="flexRadioDefault" id="flexRadioDefault1">
+          <label class="form-check-label" for="flexRadioDefault1">
+            Kasuta teist aadressi
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div v-if="selectedAddress == 1" class="row justify-content-center">
+      <div class="col-4">
+
+        <div class="row">
+          <label for="exampleFormControlInput1"></label>
+          <input selected disabled value v-model="address.streetName" class="form-control"
+                 placeholder="Tänava nimi ja maja/maja ja korteri number*">
+        </div>
+
+        <div class="row">
+          <label for="exampleFormControlInput1"></label>
+          <input selected disabled value v-model="address.districtName" class="form-control"
+                 placeholder="Linnaosa nimi">
+        </div>
+
+        <div class="row">
+          <label for="exampleFormControlInput1"></label>
+          <input selected disabled value v-model="address.phone" class="form-control" placeholder="Telefoninumber*">
+        </div>
+      </div>
+    </div>
+
+    <div v-if="selectedAddress == 2" class="row justify-content-center">
+      <div class="col-4">
+        <div class="row">
+          <label for="exampleFormControlInput1"></label>
+          <input class="form-control" placeholder="Tänava nimi ja maja/maja ja korteri number*">
+        </div>
+
+        <div class="row">
+          <select class="form-select" aria-label="Default select example">
+            <option selected>Tallinna linnaosa*</option>
+            <option value="Lasnamäe">
+              Linnaosa nimi
+            </option>
+          </select>
+        </div>
+
+        <div class="row">
+          <label for="exampleFormControlInput1"></label>
+          <input class="form-control" placeholder="Telefoninumber*">
+        </div>
+      </div>
+    </div>
 
   </div>
-
 
 </template>
 
@@ -130,6 +190,15 @@ export default {
       selectedBrandId: 0,
       userId: Number(sessionStorage.getItem('userId')),
       workTypeId: sessionStorage.getItem('workTypeId'),
+      selectedAddress: 0,
+      address: [
+        {
+          districtId: 0,
+          districtName: '',
+          streetName: '',
+          phone: ''
+        }
+      ],
       brands: [
         {
           brandId: 0,
@@ -163,13 +232,33 @@ export default {
         dateTo: '',
         price: 0
 
-
       }
 
     }
   },
 
   methods: {
+
+    showProfileAddress: function () {
+      this.selectedAddress = 1;
+      this.$http.get("https://stoplight.io/mocks/mario25/myproject/113962141/repair/address", {
+            params: {
+              address: this.address,
+            }
+          }
+      ).then(response => {
+        this.address = response.data
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+
+    showCustomAddress: function () {
+      this.selectedAddress = 2;
+      this.address = '';
+    },
+
+
     deleteBikeInfo: function (bikeId) {
       this.$http.delete("/order/bike", {
             params: {
@@ -183,21 +272,6 @@ export default {
         console.log(error)
       })
     },
-
-
-    // deleteBikeInfo: function (bikeId) {
-    //   this.$http.put("/order/bike", null, {
-    //         params: {
-    //           bikeId: bikeId
-    //         }
-    //       }
-    //   ).then(response => {
-    //     this.getBike()
-    //     console.log(response.data)
-    //   }).catch(error => {
-    //     console.log(error)
-    //   })
-    // },
 
     getBrandsSelectBoxInfo: function () {
       this.$http.get("/order/brand")
@@ -226,7 +300,6 @@ export default {
       })
     },
 
-
     getBike: function () {
       this.$http.get("/order/bike", {
         params: {
@@ -239,7 +312,6 @@ export default {
             console.log(error)
           })
     },
-
 
     clickToRepairEvent: function () {
       if (this.orderId === null) {
