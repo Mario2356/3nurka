@@ -78,13 +78,13 @@
 <!--        </div>-->
 <!--      </div>-->
 <!--    </div>-->
-    
+
 
 
 
 
     <div class="justify-content-center">
-      <button v-on:click="navigateToRepair" class=" btn btn-outline-success btn-lg m-5">REMONT</button>
+      <button v-on:click="clickToRepairEvent" class=" btn btn-outline-success btn-lg m-5">REMONT</button>
       <button v-on:click="navigateToMaintenance" class="btn btn-outline-primary btn-lg m-5">HOOLDUS</button>
       <button v-on:click="navigateToStorage" class="btn btn-outline-warning btn-lg m-5">HOIUSTAMINE</button>
     </div>
@@ -96,17 +96,17 @@
 </template>
 
 <script>
-
-
 export default {
   name: 'OrderView',
-
+  components: {},
 
 
   data: function () {
     return {
+      orderId: sessionStorage.getItem('orderId'),
       selectedBrandId: 0,
       userId: Number(sessionStorage.getItem('userId')),
+      workTypeId: sessionStorage.getItem('workTypeId'),
       brands: [
         {
           brandId: 0,
@@ -126,7 +126,23 @@ export default {
         brandId: 0,
         brandName: '',
         bikeModel: '',
+      },
+
+      orderResponse: {
+        orderId: 0,
+        userId: 0,
+        orderStatusId: 0,
+        orderStatusName: '',
+        addressId: 0,
+        addressStreetName: '',
+        number: '',
+        dateFrom: '',
+        dateTo: '',
+        price: 0
+
+
       }
+
     }
   },
 
@@ -164,7 +180,6 @@ export default {
       this.$http.get("/order/brand")
           .then(response => {
             this.brands = response.data
-            console.log('Mina olen siin')
           })
           .catch(error => {
             console.log(error)
@@ -181,7 +196,6 @@ export default {
       this.$http.post("/order/bike", this.bikeRequest
       ).then(response => {
         //Todo vaja käivitada teenus getAllUserBikes
-
         this.getBike();
         console.log(response.data)
       }).catch(error => {
@@ -203,10 +217,30 @@ export default {
           })
     },
 
-    navigateToRepair: function () {
-      this.$router.push({
-        name: 'repairRoute'
-      });
+
+    clickToRepairEvent: function () {
+      if (this.orderId === null) {
+
+        this.$http.post("/order/start", null, {
+              params: {
+                userId: this.userId,
+              }
+            }
+        ).then(response => {
+          this.orderResponse = response.data
+          sessionStorage.setItem('orderId', this.orderResponse.orderId)
+          sessionStorage.setItem('workTypeId', '1')
+
+          console.log(response.data)
+          this.$router.push({
+            name: 'repairRoute'
+          })
+
+
+        }).catch(error => {
+          console.log(error)
+        })
+      }
     },
 
     navigateToMaintenance: function () {
