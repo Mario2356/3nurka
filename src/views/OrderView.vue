@@ -53,12 +53,14 @@
             <td>{{ bike.bikeModel }}</td>
 
 
-            <td><i v-on:click="deleteBikeInfo(bike.bikeId)" class="fa-solid fa-flag fa-trash-can" data-bs-toggle="modal" data-bs-target="#exampleModal"></i></td>
+            <td><i v-on:click="deleteBikeInfo(bike.bikeId)" class="fa-solid fa-flag fa-trash-can"></i></td>
           </tr>
           </tbody>
         </table>
       </div>
     </div>
+
+<!-- ALERT MESSAGE - HETKEL EI TÖÖTA -->
 
 <!--    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
 <!--      <div class="modal-dialog">-->
@@ -72,7 +74,6 @@
 <!--          <div class="modal-footer">-->
 <!--            <button v-on:click="deleteBikeInfo(bike.bikeId)" class="btn btn-success" type="button">Jah</button>-->
 <!--            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Ei</button>-->
-
 <!--          </div>-->
 <!--        </div>-->
 <!--      </div>-->
@@ -95,11 +96,11 @@
 </template>
 
 <script>
-import AlertDeleteBikeMessage from "@/views/AlertDeleteBikeMessage";
+
 
 export default {
   name: 'OrderView',
-  components: {AlertDeleteBikeMessage},
+
 
 
   data: function () {
