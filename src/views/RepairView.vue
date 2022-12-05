@@ -16,7 +16,7 @@
 
     <div class="row align-items-end justify-content-center m-3">
       <div class="col-3">
-        <select v-model="selectedBikeId" class="form-select"
+        <select v-model="bikeOrderRequest.bikeId" class="form-select"
                 aria-label="Default select example">
           <option selected disabled value="0">Minu ratas*</option>
           <option v-for="bike in bikes" :key="bike.bikeId" :value="bike.bikeId">
@@ -24,10 +24,9 @@
           </option>
         </select>
       </div>
-<!--            <div>{{bikeOrderRequestById.bikeId}}</div>-->
       <div class="col-3">
         <label for="exampleFormControlInput1"></label>
-        <input  v-model="bikeOrderRequestById.dateFrom" class="form-control" placeholder="Soovitud kohaletulemise kuupäev*">
+        <input  v-model="bikeOrderRequest.dateFrom" class="form-control" placeholder="Soovitud kohaletulemise kuupäev*">
       </div>
     </div>
 
@@ -38,7 +37,7 @@
 
         <div class="row m-3">
           <label for="floatingTextArea">Kirjelda remondi vajaduse põhjust</label>
-          <textarea class="form-control" placeholder="Probleemi kirjeldus" id="floatingTextArea"></textarea>
+          <textarea v-model="bikeOrderRequest.customerComment" class="form-control" placeholder="Probleemi kirjeldus" id="floatingTextArea"></textarea>
         </div>
 
 
@@ -113,8 +112,8 @@
     <div class="row justify-content-center">
 
       <div class="col-2">
-        <button v-on:click="" class="btn btn-outline-primary btn-lg m-4">Salvesta</button>
-        <button v-on:click="" class="btn btn-outline-primary btn-lg m-1">Muuda</button>
+        <button v-on:click="addBikeOrder" class="btn btn-outline-primary btn-lg m-4">Salvesta</button>
+        <button class="btn btn-outline-primary btn-lg m-1">Muuda</button>
       </div>
 
       <div class="col-2">
@@ -134,7 +133,7 @@ export default {
   name: "RepairView",
   data: function () {
     return {
-      userId: sessionStorage.getItem('userId'),
+      userId: Number(sessionStorage.getItem('userId')),
       selectedBikeId: 0,
       bikes: [
         {
@@ -146,8 +145,8 @@ export default {
       ],
       bikeOrderRequest: {
         orderId: sessionStorage.getItem('orderId'),
-        bikeId: 0,
-        workTypeId: sessionStorage.getItem('workType'),
+        bikeId: '',
+        workTypeId: sessionStorage.getItem('workTypeId'),
         // todo: data tüüp?
         bikeStatusId: 0,
         packageFieldId: 0,
@@ -169,9 +168,18 @@ export default {
 
   },
   methods: {
+
+    addBikeOrder: function () {
+      this.$http.post("/repair/bikeorder", this.bikeOrderRequest
+      ).then(response => {
+        this.bikeOrderRequest = response.data
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+
     clickNavigateToOrderView: function () {
       this.$router.push({name: 'orderRoute'})
-
     },
 
     showProfileAddress: function () {
@@ -193,11 +201,6 @@ export default {
       this.address = '';
     },
 
-
-    clickSelectBikeEvent: function () {
-      this.selectedBikeId = this.bikeOrderRequestById.bikeId
-
-    },
 
     getBikesByUserId: function () {
       this.$http.get("/order/bike", {

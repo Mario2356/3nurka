@@ -79,6 +79,7 @@ export default {
       orderId: sessionStorage.getItem('orderId'),
       selectedBrandId: 0,
       userId: Number(sessionStorage.getItem('userId')),
+      workTypeId: sessionStorage.getItem('workTypeId'),
       brands: [
         {
           brandId: 0,
@@ -106,6 +107,7 @@ export default {
         orderStatusId: 0,
         orderStatusName: '',
         addressId: 0,
+        addressStreetName: '',
         number: '',
         dateFrom: '',
         dateTo: '',
@@ -162,11 +164,7 @@ export default {
 
 
     clickToRepairEvent: function () {
-      this.$router.push({
-        name: 'repairRoute'
-      });
-      sessionStorage.setItem('workTypeId', '1')
-      if (this.orderId == null) {
+      if (this.orderId === null) {
 
         this.$http.post("/order/start", null, {
               params: {
@@ -175,7 +173,14 @@ export default {
             }
         ).then(response => {
           this.orderResponse = response.data
-          sessionStorage.setItem('orderId', this.orderResponse.orderId);
+          sessionStorage.setItem('orderId', this.orderResponse.orderId)
+          sessionStorage.setItem('workTypeId', '1')
+
+          console.log(response.data)
+          this.$router.push({
+            name: 'repairRoute'
+          })
+
 
         }).catch(error => {
           console.log(error)
