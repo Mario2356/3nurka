@@ -60,6 +60,55 @@
       </div>
     </div>
 
+    <div class="row justify-content-center m-5">
+      <div class="col-lg-5">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th scope="col">Teenus</th>
+            <th scope="col">Ratta mark</th>
+            <th scope="col">Ratta mudel</th>
+            <th scope="col">Probleemi kirjeldus</th>
+            <th scope="col">Hoiustamise lõpukuupäev</th>
+            <th scope="col">Valitud pakett</th>
+            <th scope="col">Teenuse hind</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="bikeOrder in bikeOrderResponse" :key="bikeOrder.bikeOrderId">
+            <td>{{ bikeOrder.bikeModel }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ALERT MESSAGE - HETKEL EI TÖÖTA -->
+
+    <!--    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+    <!--      <div class="modal-dialog">-->
+    <!--        <div class="modal-content">-->
+    <!--          <div class="modal-header">-->
+    <!--            <h1 class="modal-title fs-5" id="exampleModalLabel">Kas soovid selle ratta kustutada?</h1>-->
+    <!--            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+    <!--          </div>-->
+    <!--          <div class="modal-fullscreen-sm-down">-->
+    <!--          </div>-->
+    <!--          <div class="modal-footer">-->
+    <!--            <button v-on:click="deleteBikeInfo(bike.bikeId)" class="btn btn-success" type="button">Jah</button>-->
+    <!--            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Ei</button>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
+
+
+    <div class="justify-content-center">
+      <button v-on:click="clickToRepairEvent" class=" btn btn-outline-success btn-lg m-5">REMONT</button>
+      <button v-on:click="navigateToMaintenance" class="btn btn-outline-primary btn-lg m-5">HOOLDUS</button>
+      <button v-on:click="navigateToStorage" class="btn btn-outline-warning btn-lg m-5">HOIUSTAMINE</button>
+    </div>
+
     <div class="row justify-content-center">
       <div class="col-3">
         <div class="form-check">
@@ -123,32 +172,6 @@
           <input class="form-control" placeholder="Telefoninumber*">
         </div>
       </div>
-    </div>
-
-    <!-- ALERT MESSAGE - HETKEL EI TÖÖTA -->
-
-    <!--    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-    <!--      <div class="modal-dialog">-->
-    <!--        <div class="modal-content">-->
-    <!--          <div class="modal-header">-->
-    <!--            <h1 class="modal-title fs-5" id="exampleModalLabel">Kas soovid selle ratta kustutada?</h1>-->
-    <!--            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-    <!--          </div>-->
-    <!--          <div class="modal-fullscreen-sm-down">-->
-    <!--          </div>-->
-    <!--          <div class="modal-footer">-->
-    <!--            <button v-on:click="deleteBikeInfo(bike.bikeId)" class="btn btn-success" type="button">Jah</button>-->
-    <!--            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Ei</button>-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--    </div>-->
-
-
-    <div class="justify-content-center">
-      <button v-on:click="clickToRepairEvent" class=" btn btn-outline-success btn-lg m-5">REMONT</button>
-      <button v-on:click="navigateToMaintenance" class="btn btn-outline-primary btn-lg m-5">HOOLDUS</button>
-      <button v-on:click="navigateToStorage" class="btn btn-outline-warning btn-lg m-5">HOIUSTAMINE</button>
     </div>
 
   </div>
