@@ -1,16 +1,17 @@
 <template>
-  <div class="row justify-content-center">
+  <div class="container">
 
-    <div class="row align-items-start ps-5 ms-5 mt-5">
-      <div class="col btn-group-vertical align-content-lg-start col-lg-2 mt-5">
+    <div class="row align-content-around mt-5 align-text-bottom">
+      <div class="col-md-9 btn-group-vertical align-content-lg-start col-lg-2 mt-5 d-inline">
         <button type="button" class="btn btn-success mb-3">Minu teenused</button>
         <button type="button" class="btn btn-success mb-3">Minu profiil</button>
         <button v-on:click="logout" type="button" class="btn btn-success">Logi välja</button>
       </div>
-    </div>
+      <div class="row col-lg-8 align-items-center background-dark ms-2 mt-5 pt-5">
+        <p><h4>TELLIMUSE VORMISTAMINE</h4>
+        <p><h6>Vali rippmenüüst ratta mark ja märgi ära ratta mudel või kirjeldus</h6>
+      </div>
 
-    <div class="col-lg-6 justify-content-center">
-      <h5>Vali rippmenüüst ratta mark, märgi ka ratta mudel või kirjeldus</h5>
     </div>
 
 
@@ -26,7 +27,7 @@
       </div>
       <div class="col-3">
         <label for="Input"></label>
-        <input v-model="bikeRequest.bikeModel" class="form-control" placeholder="Ratta mudel/kirjeldus">
+        <input v-model="bikeRequest.bikeModel" placeholder="Ratta mudel/kirjeldus">
       </div>
     </div>
 
@@ -43,17 +44,43 @@
           <tr>
             <th scope="col">Ratas</th>
             <th scope="col">Ratta mudel/kirjeldus</th>
+            <th scope="col">Kustuta valikust</th>
           </tr>
           </thead>
           <tbody>
           <tr v-for="bike in bikeResponse">
             <th scope="row">{{ bike.brandName }}</th>
             <td>{{ bike.bikeModel }}</td>
+
+
+            <td><i v-on:click="deleteBikeInfo(bike.bikeId)" class="fa-solid fa-flag fa-trash-can"></i></td>
           </tr>
           </tbody>
         </table>
       </div>
     </div>
+
+<!-- ALERT MESSAGE - HETKEL EI TÖÖTA -->
+
+<!--    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--      <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--          <div class="modal-header">-->
+<!--            <h1 class="modal-title fs-5" id="exampleModalLabel">Kas soovid selle ratta kustutada?</h1>-->
+<!--            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--          </div>-->
+<!--          <div class="modal-fullscreen-sm-down">-->
+<!--          </div>-->
+<!--          <div class="modal-footer">-->
+<!--            <button v-on:click="deleteBikeInfo(bike.bikeId)" class="btn btn-success" type="button">Jah</button>-->
+<!--            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Ei</button>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+
+
 
 
     <div class="justify-content-center">
@@ -120,6 +147,34 @@ export default {
   },
 
   methods: {
+    deleteBikeInfo: function (bikeId) {
+      this.$http.delete("/order/bike", {
+            params: {
+              bikeId: bikeId,
+            }
+          }
+      ).then(response => {
+        this.getBike()
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+
+
+    // deleteBikeInfo: function (bikeId) {
+    //   this.$http.put("/order/bike", null, {
+    //         params: {
+    //           bikeId: bikeId
+    //         }
+    //       }
+    //   ).then(response => {
+    //     this.getBike()
+    //     console.log(response.data)
+    //   }).catch(error => {
+    //     console.log(error)
+    //   })
+    // },
 
     getBrandsSelectBoxInfo: function () {
       this.$http.get("/order/brand")
