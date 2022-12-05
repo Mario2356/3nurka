@@ -60,6 +60,71 @@
       </div>
     </div>
 
+    <div class="row m-3 mt-5">
+      <div class="form-check">
+        <input v-on:click="showProfileAddress" class="form-check-input" type="radio"
+               name="flexRadioDefault" id="flexRadioDefault1">
+        <label class="form-check-label" for="flexRadioDefault1">
+          Kasuta profiiliaadressi
+        </label>
+      </div>
+    </div>
+
+
+    <div class="row m-3">
+      <div class="form-check">
+        <input v-on:click="showCustomAddress" class="form-check-input" type="radio"
+               name="flexRadioDefault" id="flexRadioDefault1">
+        <label class="form-check-label" for="flexRadioDefault1">
+          Kasuta teist aadressi
+        </label>
+      </div>
+    </div>
+
+    <div v-if="selectedAddress == 1">
+
+      <div class="row">
+        <label for="exampleFormControlInput1"></label>
+        <input selected disabled value v-model="address.streetName" class="form-control"
+               placeholder="Tänava nimi ja maja/maja ja korteri number*">
+      </div>
+
+      <div class="row">
+        <label for="exampleFormControlInput1"></label>
+        <input selected disabled value v-model="address.districtName" class="form-control"
+               placeholder="Linnaosa nimi">
+      </div>
+
+      <div class="row">
+        <label for="exampleFormControlInput1"></label>
+        <input selected disabled value v-model="address.phone" class="form-control" placeholder="Telefoninumber*">
+      </div>
+
+    </div>
+
+    <div v-if="selectedAddress == 2">
+
+      <div class="row">
+        <label for="exampleFormControlInput1"></label>
+        <input class="form-control" placeholder="Tänava nimi ja maja/maja ja korteri number*">
+      </div>
+
+      <div class="row">
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Tallinna linnaosa*</option>
+          <option value="Lasnamäe">
+            Linnaosa nimi
+          </option>
+        </select>
+      </div>
+
+      <div class="row">
+        <label for="exampleFormControlInput1"></label>
+        <input class="form-control" placeholder="Telefoninumber*">
+      </div>
+
+    </div>
+
 <!-- ALERT MESSAGE - HETKEL EI TÖÖTA -->
 
 <!--    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
@@ -80,18 +145,13 @@
 <!--    </div>-->
 
 
-
-
-
     <div class="justify-content-center">
       <button v-on:click="clickToRepairEvent" class=" btn btn-outline-success btn-lg m-5">REMONT</button>
       <button v-on:click="navigateToMaintenance" class="btn btn-outline-primary btn-lg m-5">HOOLDUS</button>
       <button v-on:click="navigateToStorage" class="btn btn-outline-warning btn-lg m-5">HOIUSTAMINE</button>
     </div>
 
-
   </div>
-
 
 </template>
 
@@ -107,6 +167,15 @@ export default {
       selectedBrandId: 0,
       userId: Number(sessionStorage.getItem('userId')),
       workTypeId: sessionStorage.getItem('workTypeId'),
+      selectedAddress: 0,
+      address: [
+        {
+          districtId: 0,
+          districtName: '',
+          streetName: '',
+          phone: ''
+        }
+      ],
       brands: [
         {
           brandId: 0,
@@ -140,13 +209,33 @@ export default {
         dateTo: '',
         price: 0
 
-
       }
 
     }
   },
 
   methods: {
+
+    showProfileAddress: function () {
+      this.selectedAddress = 1;
+      this.$http.get("https://stoplight.io/mocks/mario25/myproject/113962141/repair/address", {
+            params: {
+              address: this.address,
+            }
+          }
+      ).then(response => {
+        this.address = response.data
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+
+    showCustomAddress: function () {
+      this.selectedAddress = 2;
+      this.address = '';
+    },
+
+
     deleteBikeInfo: function (bikeId) {
       this.$http.delete("/order/bike", {
             params: {
@@ -160,21 +249,6 @@ export default {
         console.log(error)
       })
     },
-
-
-    // deleteBikeInfo: function (bikeId) {
-    //   this.$http.put("/order/bike", null, {
-    //         params: {
-    //           bikeId: bikeId
-    //         }
-    //       }
-    //   ).then(response => {
-    //     this.getBike()
-    //     console.log(response.data)
-    //   }).catch(error => {
-    //     console.log(error)
-    //   })
-    // },
 
     getBrandsSelectBoxInfo: function () {
       this.$http.get("/order/brand")
@@ -203,7 +277,6 @@ export default {
       })
     },
 
-
     getBike: function () {
       this.$http.get("/order/bike", {
         params: {
@@ -216,7 +289,6 @@ export default {
             console.log(error)
           })
     },
-
 
     clickToRepairEvent: function () {
       if (this.orderId === null) {
