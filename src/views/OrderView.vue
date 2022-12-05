@@ -60,89 +60,89 @@
       </div>
     </div>
 
-    <div class="row m-3 mt-5">
-      <div class="form-check">
-        <input v-on:click="showProfileAddress" class="form-check-input" type="radio"
-               name="flexRadioDefault" id="flexRadioDefault1">
-        <label class="form-check-label" for="flexRadioDefault1">
-          Kasuta profiiliaadressi
-        </label>
+    <div class="row justify-content-center">
+      <div class="col-3">
+        <div class="form-check">
+          <input v-on:click="showProfileAddress" class="form-check-input" type="radio"
+                 name="flexRadioDefault" id="flexRadioDefault1">
+          <label class="form-check-label" for="flexRadioDefault1">
+            Kasuta profiiliaadressi
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input v-on:click="showCustomAddress" class="form-check-input" type="radio"
+                 name="flexRadioDefault" id="flexRadioDefault1">
+          <label class="form-check-label" for="flexRadioDefault1">
+            Kasuta teist aadressi
+          </label>
+        </div>
       </div>
     </div>
 
+    <div v-if="selectedAddress == 1" class="row justify-content-center">
+      <div class="col-4">
 
-    <div class="row m-3">
-      <div class="form-check">
-        <input v-on:click="showCustomAddress" class="form-check-input" type="radio"
-               name="flexRadioDefault" id="flexRadioDefault1">
-        <label class="form-check-label" for="flexRadioDefault1">
-          Kasuta teist aadressi
-        </label>
+        <div class="row">
+          <label for="exampleFormControlInput1"></label>
+          <input selected disabled value v-model="address.streetName" class="form-control"
+                 placeholder="Tänava nimi ja maja/maja ja korteri number*">
+        </div>
+
+        <div class="row">
+          <label for="exampleFormControlInput1"></label>
+          <input selected disabled value v-model="address.districtName" class="form-control"
+                 placeholder="Linnaosa nimi">
+        </div>
+
+        <div class="row">
+          <label for="exampleFormControlInput1"></label>
+          <input selected disabled value v-model="address.phone" class="form-control" placeholder="Telefoninumber*">
+        </div>
       </div>
     </div>
 
-    <div v-if="selectedAddress == 1">
+    <div v-if="selectedAddress == 2" class="row justify-content-center">
+      <div class="col-4">
+        <div class="row">
+          <label for="exampleFormControlInput1"></label>
+          <input class="form-control" placeholder="Tänava nimi ja maja/maja ja korteri number*">
+        </div>
 
-      <div class="row">
-        <label for="exampleFormControlInput1"></label>
-        <input selected disabled value v-model="address.streetName" class="form-control"
-               placeholder="Tänava nimi ja maja/maja ja korteri number*">
+        <div class="row">
+          <select class="form-select" aria-label="Default select example">
+            <option selected>Tallinna linnaosa*</option>
+            <option value="Lasnamäe">
+              Linnaosa nimi
+            </option>
+          </select>
+        </div>
+
+        <div class="row">
+          <label for="exampleFormControlInput1"></label>
+          <input class="form-control" placeholder="Telefoninumber*">
+        </div>
       </div>
-
-      <div class="row">
-        <label for="exampleFormControlInput1"></label>
-        <input selected disabled value v-model="address.districtName" class="form-control"
-               placeholder="Linnaosa nimi">
-      </div>
-
-      <div class="row">
-        <label for="exampleFormControlInput1"></label>
-        <input selected disabled value v-model="address.phone" class="form-control" placeholder="Telefoninumber*">
-      </div>
-
     </div>
 
-    <div v-if="selectedAddress == 2">
+    <!-- ALERT MESSAGE - HETKEL EI TÖÖTA -->
 
-      <div class="row">
-        <label for="exampleFormControlInput1"></label>
-        <input class="form-control" placeholder="Tänava nimi ja maja/maja ja korteri number*">
-      </div>
-
-      <div class="row">
-        <select class="form-select" aria-label="Default select example">
-          <option selected>Tallinna linnaosa*</option>
-          <option value="Lasnamäe">
-            Linnaosa nimi
-          </option>
-        </select>
-      </div>
-
-      <div class="row">
-        <label for="exampleFormControlInput1"></label>
-        <input class="form-control" placeholder="Telefoninumber*">
-      </div>
-
-    </div>
-
-<!-- ALERT MESSAGE - HETKEL EI TÖÖTA -->
-
-<!--    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-<!--      <div class="modal-dialog">-->
-<!--        <div class="modal-content">-->
-<!--          <div class="modal-header">-->
-<!--            <h1 class="modal-title fs-5" id="exampleModalLabel">Kas soovid selle ratta kustutada?</h1>-->
-<!--            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--          </div>-->
-<!--          <div class="modal-fullscreen-sm-down">-->
-<!--          </div>-->
-<!--          <div class="modal-footer">-->
-<!--            <button v-on:click="deleteBikeInfo(bike.bikeId)" class="btn btn-success" type="button">Jah</button>-->
-<!--            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Ei</button>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
+    <!--    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+    <!--      <div class="modal-dialog">-->
+    <!--        <div class="modal-content">-->
+    <!--          <div class="modal-header">-->
+    <!--            <h1 class="modal-title fs-5" id="exampleModalLabel">Kas soovid selle ratta kustutada?</h1>-->
+    <!--            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+    <!--          </div>-->
+    <!--          <div class="modal-fullscreen-sm-down">-->
+    <!--          </div>-->
+    <!--          <div class="modal-footer">-->
+    <!--            <button v-on:click="deleteBikeInfo(bike.bikeId)" class="btn btn-success" type="button">Jah</button>-->
+    <!--            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Ei</button>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
 
 
     <div class="justify-content-center">
