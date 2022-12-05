@@ -60,68 +60,26 @@
       </div>
     </div>
 
-    <div class="row justify-content-center">
-      <div class="col-3">
-        <div class="form-check">
-          <input v-on:click="showProfileAddress" class="form-check-input" type="radio"
-                 name="flexRadioDefault" id="flexRadioDefault1">
-          <label class="form-check-label" for="flexRadioDefault1">
-            Kasuta profiiliaadressi
-          </label>
-        </div>
-
-        <div class="form-check">
-          <input v-on:click="showCustomAddress" class="form-check-input" type="radio"
-                 name="flexRadioDefault" id="flexRadioDefault1">
-          <label class="form-check-label" for="flexRadioDefault1">
-            Kasuta teist aadressi
-          </label>
-        </div>
-      </div>
-    </div>
-
-    <div v-if="selectedAddress == 1" class="row justify-content-center">
-      <div class="col-4">
-
-        <div class="row">
-          <label for="exampleFormControlInput1"></label>
-          <input selected disabled value v-model="address.streetName" class="form-control"
-                 placeholder="Tänava nimi ja maja/maja ja korteri number*">
-        </div>
-
-        <div class="row">
-          <label for="exampleFormControlInput1"></label>
-          <input selected disabled value v-model="address.districtName" class="form-control"
-                 placeholder="Linnaosa nimi">
-        </div>
-
-        <div class="row">
-          <label for="exampleFormControlInput1"></label>
-          <input selected disabled value v-model="address.phone" class="form-control" placeholder="Telefoninumber*">
-        </div>
-      </div>
-    </div>
-
-    <div v-if="selectedAddress == 2" class="row justify-content-center">
-      <div class="col-4">
-        <div class="row">
-          <label for="exampleFormControlInput1"></label>
-          <input class="form-control" placeholder="Tänava nimi ja maja/maja ja korteri number*">
-        </div>
-
-        <div class="row">
-          <select class="form-select" aria-label="Default select example">
-            <option selected>Tallinna linnaosa*</option>
-            <option value="Lasnamäe">
-              Linnaosa nimi
-            </option>
-          </select>
-        </div>
-
-        <div class="row">
-          <label for="exampleFormControlInput1"></label>
-          <input class="form-control" placeholder="Telefoninumber*">
-        </div>
+    <div class="row justify-content-center m-5">
+      <div class="col-lg-5">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th scope="col">Teenus</th>
+            <th scope="col">Ratta mark</th>
+            <th scope="col">Ratta mudel</th>
+            <th scope="col">Probleemi kirjeldus</th>
+            <th scope="col">Hoiustamise lõpukuupäev</th>
+            <th scope="col">Valitud pakett</th>
+            <th scope="col">Teenuse hind</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="bikeOrder in bikeOrderResponse" :key="bikeOrder.bikeOrderId">
+            <td>{{ bikeOrder.bikeModel }}</td>
+          </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
