@@ -11,7 +11,6 @@
         <p><h4>TELLIMUSE VORMISTAMINE</h4>
         <p><h6>Vali rippmenüüst ratta mark ja märgi ära ratta mudel või kirjeldus</h6>
       </div>
-
     </div>
 
 
@@ -60,28 +59,6 @@
       </div>
     </div>
 
-    <div class="row justify-content-center m-5">
-      <div class="col-lg-5">
-        <table class="table table-bordered">
-          <thead>
-          <tr>
-            <th scope="col">Teenus</th>
-            <th scope="col">Ratta mark</th>
-            <th scope="col">Ratta mudel</th>
-            <th scope="col">Probleemi kirjeldus</th>
-            <th scope="col">Hoiustamise lõpukuupäev</th>
-            <th scope="col">Valitud pakett</th>
-            <th scope="col">Teenuse hind</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr v-for="bikeOrder in bikeOrderResponse" :key="bikeOrder.bikeOrderId">
-            <td>{{ bikeOrder.bikeModel }}</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
 
     <!-- ALERT MESSAGE - HETKEL EI TÖÖTA -->
 
@@ -174,6 +151,37 @@
       </div>
     </div>
 
+    <div v-if="orderId!==null" class="row justify-content-center m-4">
+      {{ bikeOrderResponse.orderNumber }}
+      <div class="col-lg-11">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th scope="col">Teenus</th>
+            <th scope="col">Ratta mark</th>
+            <th scope="col">Ratta mudel</th>
+            <th scope="col">Probleemi kirjeldus</th>
+            <th scope="col">Valitud pakett</th>
+            <th scope="col">Teenuse hind</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr v-for="bikeOrder in bikeOrderResponse.bikeOrders" :key="bikeOrderResponse.bikeOrders.bikeOrderId">
+            <td>{{ bikeOrder.workTypeName }}</td>
+            <td>{{ bikeOrder.bikeBrandName }}</td>
+            <td>{{ bikeOrder.bikeModel }}</td>
+            <td>{{ bikeOrder.customerComment }}</td>
+            <td>{{ bikeOrder.packageFieldName }}</td>
+            <td>{{ bikeOrder.packageFieldPrice }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="m-5">
+      <button class="btn btn-outline-dark">Kinnita tellimus</button>
+    </div>
   </div>
 
 </template>
@@ -191,6 +199,7 @@ export default {
       userId: Number(sessionStorage.getItem('userId')),
       workTypeId: sessionStorage.getItem('workTypeId'),
       selectedAddress: 0,
+
       address: [
         {
           districtId: 0,
@@ -232,12 +241,39 @@ export default {
         dateTo: '',
         price: 0
 
-      }
-
+      },
+      bikeOrderResponse: [{
+        orderNumber: '',
+        bikeOrders: [{
+          bikeOrderId: 0,
+          bikeBrandName: '',
+          bikeModel: '',
+          workTypeName: '',
+          packageFieldName: '',
+          packageFieldPrice: 0,
+          customerComment: ''
+        }]
+      }]
     }
   },
 
   methods: {
+
+    getBikeOrderInfo: function () {
+      if (this.orderId !== null) {
+        this.$http.get("/order/info", {
+              params: {
+                orderId: this.orderId,
+              }
+            }
+        ).then(response => {
+          this.bikeOrderResponse = response.data
+        }).catch(error => {
+          console.log(error)
+        })
+      }
+    },
+
 
     showProfileAddress: function () {
       this.selectedAddress = 1;
@@ -335,6 +371,11 @@ export default {
         }).catch(error => {
           console.log(error)
         })
+      } else {
+        this.$router.push({
+          name: 'repairRoute'
+        })
+
       }
     },
 
@@ -362,6 +403,7 @@ export default {
   beforeMount() {
     this.getBrandsSelectBoxInfo()
     this.getBike()
+    this.getBikeOrderInfo()
   }
 
 }
