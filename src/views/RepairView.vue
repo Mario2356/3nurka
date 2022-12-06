@@ -85,6 +85,7 @@ export default {
         dateFrom: '',
         dateTo: '',
         customerComment: '',
+        techComment:''
       },
     }
   },
@@ -94,6 +95,7 @@ export default {
       this.$http.post("/repair/bikeorder", this.bikeOrderRequest
       ).then(response => {
         this.bikeOrderRequest = response.data
+        this.$router.push({name: 'orderRoute'})
       }).catch(error => {
         console.log(error)
       })
