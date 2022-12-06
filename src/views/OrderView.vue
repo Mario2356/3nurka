@@ -198,14 +198,16 @@ export default {
       selectedBrandId: 0,
       userId: Number(sessionStorage.getItem('userId')),
       workTypeId: sessionStorage.getItem('workTypeId'),
+
       selectedAddress: 0,
 
       address: [
         {
+          addressId: 0,
           districtId: 0,
           districtName: '',
           streetName: '',
-          phone: ''
+          phone: '',
         }
       ],
       brands: [
@@ -277,9 +279,9 @@ export default {
 
     showProfileAddress: function () {
       this.selectedAddress = 1;
-      this.$http.get("https://stoplight.io/mocks/mario25/myproject/113962141/repair/address", {
+      this.$http.get("/order/profile", {
             params: {
-              address: this.address,
+              userId: this.userId,
             }
           }
       ).then(response => {
@@ -291,7 +293,6 @@ export default {
 
     showCustomAddress: function () {
       this.selectedAddress = 2;
-      this.address = '';
     },
 
 
