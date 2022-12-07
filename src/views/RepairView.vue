@@ -1,7 +1,7 @@
 <template>
   <div class="container">
 
-    <div class="row align-items-start ps-5 mt-5">
+    <div class="row align-items-start ps-5 ms-5 mt-5">
       <div class="col btn-group-vertical align-content-lg-start col-lg-2 mt-5">
         <button type="button" class="btn btn-success mb-3">Minu teenused</button>
         <button type="button" class="btn btn-success mb-3">Minu profiil</button>
@@ -14,21 +14,7 @@
     </div>
 
 
-    <div class="row align-items-end justify-content-center m-3">
-      <div class="col-3">
-        <select v-model="bikeOrderRequest.bikeId" class="form-select"
-                aria-label="Default select example">
-          <option selected disabled value="0">Minu ratas*</option>
-          <option v-for="bike in bikes" :key="bike.bikeId" :value="bike.bikeId">
-            {{ bike.brandName + "-" + bike.bikeModel}}
-          </option>
-        </select>
-      </div>
-      <div class="col-3">
-        <label for="exampleFormControlInput1"></label>
-        <input type="date" v-model="bikeOrderRequest.dateFrom" class="form-control" placeholder="Soovitud kohaletulemise kuupäev*">
-      </div>
-    </div>
+    <SelectBikeAndTime :bike-order-request="bikeOrderRequest" :bikes="bikes"/>
 
 
     <div class="row m-3 justify-content-center">
@@ -47,8 +33,7 @@
     <div class="row justify-content-center">
 
       <div class="col-2">
-        <button v-on:click="addBikeOrder" class="btn btn-outline-primary btn-lg m-4">Salvesta</button>
-        <button class="btn btn-outline-primary btn-lg m-1">Muuda</button>
+        <button v-on:click="addRepairBikeOrder" class="btn btn-outline-primary btn-lg m-4">Salvesta</button>
       </div>
 
       <div class="col-2">
@@ -63,8 +48,11 @@
 
 <script>
 
+import SelectBikeAndTime from "@/components/SelectBikeAndTime";
+
 export default {
   name: "RepairView",
+  components: {SelectBikeAndTime},
   data: function () {
     return {
       userId: Number(sessionStorage.getItem('userId')),
@@ -91,7 +79,7 @@ export default {
   },
   methods: {
 
-    addBikeOrder: function () {
+    addRepairBikeOrder: function () {
       this.$http.post("/repair/bikeorder", this.bikeOrderRequest
       ).then(response => {
         this.bikeOrderRequest = response.data
