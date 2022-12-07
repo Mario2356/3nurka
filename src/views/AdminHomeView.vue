@@ -15,14 +15,15 @@
         </thead>
 
         <tbody>
-        <tr v-for="bikeOrder in adminOrderRequest" :key="adminOrderRequest.orderId">
+        <tr v-for="bikeOrder in adminOrderRequest" :key="bikeOrder.orderId">
           <th scope="row">{{ bikeOrder.orderNumber }}</th>
           <td>{{ bikeOrder.workTypeName }}</td>
           <td>{{ bikeOrder.orderDateFrom }}</td>
           <td>{{ bikeOrder.orderStatusName }}</td>
           <td> {{ bikeOrder.firstName }} {{ bikeOrder.lastName }}</td>
           <td>
-            <button type="button" v-on:click="navigateToAdminDetailsRoute" class="btn btn-outline-dark">Lisainfo
+            <button type="button" v-on:click="navigateToAdminDetailRoute(bikeOrder.orderId)"
+                    class="btn btn-outline-dark">Lisainfo
             </button>
           </td>
         </tr>
@@ -77,13 +78,13 @@ export default {
           .then(response => {
             this.adminOrderRequest = response.data
             console.log(response.data)
-            sessionStorage.setItem('orderId', this.adminOrderRequest.orderId)
           })
           .catch(error => {
             console.log(error)
           })
     },
-    navigateToAdminDetailsRoute: function () {
+    navigateToAdminDetailRoute: function (orderId) {
+      sessionStorage.setItem('orderId', orderId)
       this.$router.push({
         name: 'adminDetailRoute'
       })

@@ -6,7 +6,7 @@
       <div class="row col-md-2mt-5 mb-5">
         <div class="col">
           <button v-on:click="navigateToAdminView" type="button" class="btn btn-outline-dark float-end ">Tagasi</button>
-          <h5 class="pt-4 float-start ms-5 ps-5">TELLIMUSE NUMBER: {{}}</h5>
+          <h5 class="pt-4 float-start ms-5 ps-5">TELLIMUSE NUMBER: {{adminDetailOrderRequest.orderNumber}}</h5>
         </div>
       </div>
 
@@ -24,13 +24,14 @@
         </thead>
 
         <tbody>
-        <tr>
-          <th scope="row">tekst</th>
-          <td>tekst</td>
-          <td>tekst</td>
-          <td>tekst</td>
-          <td>tekst</td>
-          <td>tekst</td>
+        <tr v-for="bikeOrder in adminDetailOrderRequest.bikeOrders" :key="adminDetailOrderRequest.bikeOrders.bikeOrderId">
+          <td>{{ bikeOrder.workTypeName }}</td>
+          <td>{{ bikeOrder.bikeBrandName }}</td>
+          <td>{{ bikeOrder.bikeModel }}</td>
+          <td>{{ bikeOrder.packageFieldName }}</td>
+          <td>{{ bikeOrder.customerComment }}</td>
+          <td>{{ bikeOrder.techComment }}</td>
+          <td>{{ bikeOrder.packageFieldPrice }}</td>
         </tr>
 
         </tbody>
@@ -47,8 +48,9 @@ export default {
 
   data: function () {
     return {
-      adminDetailsOrderRequest:
-          {
+      orderId: sessionStorage.getItem('orderId'),
+      adminDetailOrderRequest:
+          [{
             orderNumber: '',
             bikeOrders: [{
               bikeOrderId: 0,
@@ -60,26 +62,36 @@ export default {
               customerComment: '',
               techComment: ''
             }]
-          }
+          }]
     }
   },
 
   methods: {
-    adminDetailOrders: function () {
-      this.$http.get("/some/path")
-          .then(response => {
-            console.log(response.data)
-          })
-          .catch(error => {
-            console.log(error)
-          })
+    getBikeOrderInfo: function () {
+      // if (this.orderId !== null) {
+      this.$http.get("/admin/detail", {
+            params: {
+              orderId: this.orderId,
+            }
+          }
+      ).then(response => {
+        this.adminDetailOrderRequest = response.data
+      }).catch(error => {
+        console.log(error)
+      })
     },
+
+
     navigateToAdminView: function () {
       this.$router.push({
         name: 'adminHomeRoute'
       });
-    },
-    
+    }
+
+  },
+  beforeMount() {
+    this.getBikeOrderInfo()
+
   }
 
 
