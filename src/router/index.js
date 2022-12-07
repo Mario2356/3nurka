@@ -11,6 +11,7 @@ import MaintenanceView from "@/views/MaintenanceView";
 import StorageView from "@/views/StorageView";
 import CustomerProfileView from "@/views/CustomerProfileView";
 import PricelistView from "@/views/PricelistView";
+import AdminFurtherDetailView from "@/views/AdminDetailView";
 
 Vue.use(VueRouter)
 
@@ -24,6 +25,11 @@ const routes = [
     path: '/admin',
     name: 'adminHomeRoute',
     component: AdminHomeView
+  },
+  {
+    path: '/admin/detail',
+    name: 'adminDetailRoute',
+    component: AdminFurtherDetailView
   },
   {
     path: '/customer',

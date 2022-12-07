@@ -167,7 +167,8 @@
           </thead>
 
           <tbody>
-          <tr v-for="bikeOrder in bikeOrderResponse.bikeOrders" :key="bikeOrderResponse.bikeOrders.bikeOrderId">
+          <tr v-for="bikeOrder in bikeOrderResponse.bikeOrders"
+              :key="bikeOrderResponse.bikeOrders.bikeOrderId">
             <td>{{ bikeOrder.workTypeName }}</td>
             <td>{{ bikeOrder.bikeBrandName }}</td>
             <td>{{ bikeOrder.bikeModel }}</td>

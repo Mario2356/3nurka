@@ -30,7 +30,7 @@
           </div>
 
 
-          <div v-if="errorResponse.message.length > 0" class="alert alert-danger d-flex align-items-center" role="alert">
+          <div v-if="errorResponse.message.length > 0" class="alert alert-danger mb-5 align-items-center" role="alert">
             {{ errorResponse.message }}
 
           </div>
@@ -39,9 +39,10 @@
         </div>
 
 
-        <div class="col-sm-6 pt-5 pb-5 ms-1 mb-5">
+        <div class="col-sm-6 pt-5 pb-5 ms-1 mb-5 ">
           <img src="../assets/image_1.jpg" alt="image_1" class="register-image">
         </div>
+
 
       </div>
     </div>

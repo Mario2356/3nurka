@@ -1,5 +1,6 @@
 <template>
-  <div class="container footer mt-5">
+
+  <div class="container footer">
     <div class="row">
       <div class="col">
         <p><b>3nurka OÜ</b></p>
@@ -21,6 +22,7 @@
       </div>
     </div>
   </div>
+
 </template>
 <script>
 export default {
