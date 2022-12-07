@@ -3,8 +3,8 @@
 
     <div class="row align-content-around mt-5 align-text-bottom">
       <div class="col-md-9 btn-group-vertical align-content-lg-start col-lg-2 mt-5 d-inline">
-        <button type="button" class="btn btn-success mb-3">Minu teenused</button>
-        <button type="button" class="btn btn-success mb-3">Minu profiil</button>
+<!--        <button type="button" class="btn btn-success mb-3">Minu teenused</button>-->
+        <button v-on:click="navigateToProfileView" type="button" class="btn btn-success mb-3">Minu profiil</button>
         <button v-on:click="logout" type="button" class="btn btn-success">Logi välja</button>
       </div>
       <div class="row col-lg-8 align-items-center background-dark ms-2 mt-5 pt-5">
@@ -132,7 +132,7 @@
       <div class="col-4">
         <div class="row">
           <label for="exampleFormControlInput1"></label>
-          <input class="form-control" placeholder="Tänava nimi ja maja/maja ja korteri number*">
+          <input class="form-control" placeholder="Tänava nimi ja maja/korteri number*">
         </div>
 
         <div class="row">
@@ -391,6 +391,14 @@ export default {
       this.$router.push({
         name: 'storageRoute'
       })
+    },
+
+    navigateToProfileView: function () {
+      sessionStorage.setItem('userId', this.userId)
+      this.$router.push({
+        name: 'customerProfileRoute'
+      })
+
     },
 
     logout: function () {

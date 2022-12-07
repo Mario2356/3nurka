@@ -17,7 +17,7 @@ nav a {
     font-size: 13px;
     position: relative;
     text-align: center;
-    bottom: -150px;
+    bottom: -60px;
 
 
 }
@@ -71,6 +71,10 @@ nav a {
 }
 .input-width {
     width: 140px;
+}
+.input-width-profile {
+    width:180px;
+
 }
 .fa-flag:hover {
     color: red;
