@@ -91,12 +91,14 @@ export default {
           this.loginResponse = response.data
           if (this.loginResponse.roleType === 'admin') {
             sessionStorage.setItem('userId', this.loginResponse.userId);
+            this.$emit('updateStatusEvent')
             this.$router.push({
               name: 'adminHomeRoute'
             });
 
           } else {
             sessionStorage.setItem('userId', this.loginResponse.userId);
+            this.$emit('updateStatusEvent')
             this.$router.push({
               name: 'orderRoute'
             })
@@ -112,8 +114,6 @@ export default {
     }
 
   },
-
-
 
 
 }
