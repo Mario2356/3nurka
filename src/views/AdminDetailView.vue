@@ -30,7 +30,7 @@
           <td>{{ bikeOrder.bikeModel }}</td>
           <td>{{ bikeOrder.packageFieldName }}</td>
           <td>{{ bikeOrder.customerComment }}</td>
-          <td><input type="text" :value="bikeOrder.techComment">
+          <td><input type="text" v-model="bikeOrder.techComment">
             <button v-on:click="updateTechComment(bikeOrder.bikeOrderId, bikeOrder.techComment)" type="button" class="btn btn-outline-dark float-end ">Uuenda</button>
           </td>
           <td>{{ bikeOrder.packageFieldPrice }}</td>
@@ -85,7 +85,7 @@ export default {
     },
 
     updateTechComment: function (bikeOrderId, techComment) {
-      this.$http.put("/some/path", null, {
+     this.$http.put("/admin/submit/tech-comment", null, {
             params: {
               bikeOrderId: bikeOrderId,
               techComment: techComment

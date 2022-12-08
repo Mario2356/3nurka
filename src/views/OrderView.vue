@@ -5,7 +5,7 @@
     </div>
     <div class="row ">
       <div class="col-3 btn-group-vertical align-content-lg-start col-lg-2 mt-5 d-inline">
-        <button type="button" class="btn btn-success mb-3">Minu profiil</button>
+        <button v-on:click="navigateToProfileView" type="button" class="btn btn-success mb-3">Minu profiil</button>
         <button v-on:click="logout" type="button" class="btn btn-success">Logi välja</button>
       </div>
       <div class="col-8 align-items-center ms-5">
@@ -493,6 +493,14 @@ export default {
       this.$router.push({
         name: 'maintenanceRoute'
       });
+    },
+
+    navigateToProfileView: function () {
+      sessionStorage.setItem('userId', this.userId)
+      this.$router.push({
+        name: 'customerProfileRoute'
+      })
+
     },
 
     logout: function () {
