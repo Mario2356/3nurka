@@ -7,7 +7,6 @@
             <thead>
               <tr>
                 <th class="th-sm" scope="col">Tellimuse number</th>
-                <th class="th-sm" scope="col">Teenus</th>
                 <th scope="col">Tellimuse kuupäev</th>
                 <th scope="col">Tellimuse staatus</th>
                 <th scope="col">Kliendi nimi</th>
@@ -18,7 +17,6 @@
               <tbody>
               <tr v-for="bikeOrder in adminOrderRequest" :key="bikeOrder.orderId">
                 <th scope="row">{{ bikeOrder.orderNumber }}</th>
-                <td>{{ bikeOrder.workTypeName }}</td>
                 <td>{{ bikeOrder.orderDateFrom }}</td>
                 <td>{{ bikeOrder.orderStatusName }}</td>
                 <td> {{ bikeOrder.firstName }} {{ bikeOrder.lastName }}</td>
