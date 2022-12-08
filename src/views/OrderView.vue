@@ -50,8 +50,6 @@
           <tr v-for="bike in bikeResponse">
             <th scope="row">{{ bike.brandName }}</th>
             <td>{{ bike.bikeModel }}</td>
-
-
             <td><i v-on:click="deleteBikeInfo(bike.bikeId)" class="fa-solid fa-flag fa-trash-can"></i></td>
           </tr>
           </tbody>
@@ -60,24 +58,7 @@
     </div>
 
 
-    <!-- ALERT MESSAGE - HETKEL EI TÖÖTA -->
 
-    <!--    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-    <!--      <div class="modal-dialog">-->
-    <!--        <div class="modal-content">-->
-    <!--          <div class="modal-header">-->
-    <!--            <h1 class="modal-title fs-5" id="exampleModalLabel">Kas soovid selle ratta kustutada?</h1>-->
-    <!--            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-    <!--          </div>-->
-    <!--          <div class="modal-fullscreen-sm-down">-->
-    <!--          </div>-->
-    <!--          <div class="modal-footer">-->
-    <!--            <button v-on:click="deleteBikeInfo(bike.bikeId)" class="btn btn-success" type="button">Jah</button>-->
-    <!--            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Ei</button>-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--    </div>-->
 
 
     <div class="justify-content-center">
@@ -183,7 +164,10 @@
     <div class="m-5">
       <button class="btn btn-outline-dark">Kinnita tellimus</button>
     </div>
+
+
   </div>
+
 
 </template>
 

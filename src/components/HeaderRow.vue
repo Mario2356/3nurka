@@ -16,6 +16,7 @@
           |
           <router-link to="/login">Logi sisse</router-link>
 
+
         </nav>
       </div>
     </div>
@@ -28,9 +29,13 @@ export default {
   name: 'HeaderRow',
 
   data: function () {
+    return {}
+  },
+
+  methods: {
 
   }
+
+
 }
-
-
 </script>

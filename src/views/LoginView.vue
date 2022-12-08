@@ -43,10 +43,9 @@
           <img src="../assets/image_1.jpg" alt="image_1" class="register-image">
         </div>
 
-
       </div>
-    </div>
 
+    </div>
   </div>
 
 </template>

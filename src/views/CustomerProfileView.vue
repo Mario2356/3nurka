@@ -3,8 +3,7 @@
     <div class="container">
       <div class="row align-content-around mt-5 align-text-bottom">
         <div class="col-md-4 btn-group-vertical align-content-lg-start col-lg-2 mt-5 d-inline">
-          <!--        <button type="button" class="btn btn-success mb-3">Minu teenused</button>-->
-          <button v-on:click="logout" type="button" class="btn btn-success">Tagasi teenuste juurde</button>
+          <button type="button" v-on:click="clickNavigateToOrderView" class="btn btn-success">Tagasi teenuste juurde</button>
         </div>
       </div>
     </div>
@@ -54,6 +53,8 @@
         </div>
       </form>
     </div>
+
+
   </div>
 
 
@@ -61,7 +62,44 @@
 
 <script>
 export default {
-  name: "CustomerProfileView"
+  name: "CustomerProfileView",
+
+  data: function () {
+    return {
+      selectedAddress: 0,
+      address: [
+        {
+          addressId: 0,
+          districtId: 0,
+          districtName: '',
+          streetName: '',
+          phone: '',
+        }
+      ],
+    }
+  },
+  methods: {
+
+    showProfileAddress: function () {
+      this.selectedAddress = 1;
+      this.$http.get("/order/profile", {
+            params: {
+              userId: this.userId,
+            }
+          }
+      ).then(response => {
+        this.address = response.data
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    clickNavigateToOrderView: function () {
+      this.$router.push({name: 'orderRoute'})
+    }
+  }
+
 }
+
+
 </script>
 
