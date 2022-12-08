@@ -75,7 +75,6 @@ export default {
 
 
     login: function () {
-
       this.errorResponse.message = ''
       if (this.email.length == 0 || this.password.length == 0) {
         this.errorResponse.message = 'Täida kõik väljad';
