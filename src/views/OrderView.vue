@@ -93,11 +93,14 @@
       <button v-on:click="navigateToMaintenance" class="btn btn-outline-primary btn-lg m-5">HOOLDUS</button>
       <button v-on:click="clickToStorageEvent" class="btn btn-outline-warning btn-lg m-5">HOIUSTAMINE</button>
     </div>
+    <div class="row">
+      <p><h5>4. Soovi korral lisa veel teenuseid</h5>
+    </div>
 
 
     <div v-if="orderId!==null" class="row justify-content-center m-5">
 
-      <h4>Kogutellimuse number: {{ bikeOrderResponse.orderNumber }}</h4>
+      <h5>Kogutellimuse number: {{ bikeOrderResponse.orderNumber }}</h5>
       <div class="col-lg-11">
         <table class="table table-bordered">
           <thead>
@@ -118,17 +121,17 @@
             <td>{{ bikeOrder.bikeModel }}</td>
             <td>{{ bikeOrder.customerComment }}</td>
             <td>{{ bikeOrder.packageFieldName }}</td>
-            <td>{{ bikeOrder.packageFieldPrice }}</td>
+            <td>{{ bikeOrder.packageFieldPrice + " eurot" }}</td>
           </tr>
           </tbody>
         </table>
-        <h4>Kogumaksumus: {{ bikeOrderResponse.totalPrice }}</h4>
+        <div class="row align-items-end">
+        <h5>Kogumaksumus: {{ bikeOrderResponse.totalPrice + " eurot"}}</h5>
+        </div>
       </div>
     </div>
-    <div class="row ">
-      <p><h5>4. Soovi korral lisa veel teenuseid</h5>
+    <div class="row">
       <p><h5>5. Täida kontaktandmed</h5>
-
     </div>
 
     <div class="row justify-content-center">
