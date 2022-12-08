@@ -3,7 +3,7 @@
     <HeaderRow/>
 
 
-    <router-view/>
+    <router-view @updateStatusEvent="updateStatus"/>
     <FooterRow/>
     </div>
 </template>
@@ -18,6 +18,7 @@ import HeaderRow from "@/components/HeaderRow";
 
 export default {
   components: {HeaderRow, FooterRow}
+
 
 }
 </script>
