@@ -59,7 +59,7 @@
 
     <div class="row justify-content-center mt-4 ">
       <div class="col-6">
-      <button v-on:click="addBike" class="btn btn-outline-dark">Lisa ratas valikusse</button>
+        <button v-on:click="addBike" class="btn btn-outline-dark">Lisa ratas valikusse</button>
       </div>
     </div>
 
@@ -137,7 +137,8 @@
     <div class="row justify-content-center">
       <div class="col-3">
         <div class="form-check">
-          <input v-on:click="showProfileAddress" class="form-check-input" type="radio"
+          <input v-model="selectedAddress" value="1" v-on:click="showProfileAddress" class="form-check-input"
+                 type="radio"
                  name="flexRadioDefault" id="flexRadioDefault1">
           <label class="form-check-label" for="flexRadioDefault1">
             Kasuta profiiliaadressi
@@ -145,7 +146,8 @@
         </div>
 
         <div class="form-check">
-          <input v-on:click="showCustomAddress" class="form-check-input" type="radio"
+          <input v-model="selectedAddress" value="2" v-on:click="showCustomAddress" class="form-check-input"
+                 type="radio"
                  name="flexRadioDefault" id="flexRadioDefault1">
           <label class="form-check-label" for="flexRadioDefault1">
             Kasuta teist aadressi
@@ -159,19 +161,20 @@
 
         <div class="row">
           <label for="exampleFormControlInput1"></label>
-          <input selected disabled value v-model="address.streetName" class="form-control"
+          <input selected disabled value v-model="locationRequest.streetName" class="form-control"
                  placeholder="Tänava nimi ja maja/maja ja korteri number*">
         </div>
 
         <div class="row">
           <label for="exampleFormControlInput1"></label>
-          <input selected disabled value v-model="address.districtName" class="form-control"
+          <input selected disabled value v-model="locationRequest.districtName" class="form-control"
                  placeholder="Linnaosa nimi">
         </div>
 
         <div class="row">
           <label for="exampleFormControlInput1"></label>
-          <input selected disabled value v-model="address.phone" class="form-control" placeholder="Telefoninumber*">
+          <input selected disabled value v-model="locationRequest.phone" class="form-control"
+                 placeholder="Telefoninumber*">
         </div>
       </div>
     </div>
@@ -180,31 +183,29 @@
       <div class="col-4">
         <div class="row">
           <label for="exampleFormControlInput1"></label>
-          <input class="form-control" placeholder="Tänava nimi ja maja/maja ja korteri number*">
+          <input v-model="locationRequest.streetName" class="form-control"
+                 placeholder="Tänava nimi ja maja/maja ja korteri number*">
         </div>
 
         <div class="row">
-          <select class="form-select" aria-label="Default select example">
-            <option selected>Tallinna linnaosa*</option>
-            <option value="Lasnamäe">
-              Linnaosa nimi
+          <select v-on:change="clickSelectedDistrictEvent" v-model="selectedDistrictId" class="form-select" aria-label="Default select example">
+            <option selected disabled value="0">Tallinna linnaosa*</option>
+            <option v-for="district in districts" :key="district.districtId" :value="district.districtId">
+              {{ district.districtName }}
             </option>
           </select>
         </div>
 
         <div class="row">
           <label for="exampleFormControlInput1"></label>
-          <input class="form-control" placeholder="Telefoninumber*">
+          <input v-model="locationRequest.phone" class="form-control" placeholder="Telefoninumber*">
         </div>
       </div>
     </div>
     <div class="m-5">
-      <button class="btn btn-outline-dark">Salvesta</button>
+      <button v-on:click="submitOrder()" class="btn btn-outline-dark">Kinnita tellimus</button>
     </div>
 
-    <div class="m-5">
-      <button class="btn btn-outline-dark">Kinnita tellimus</button>
-    </div>
   </div>
 
 </template>
@@ -217,22 +218,31 @@ export default {
 
   data: function () {
     return {
-      orderId: sessionStorage.getItem('orderId'),
-      selectedBrandId: 0,
       userId: Number(sessionStorage.getItem('userId')),
+      orderId: sessionStorage.getItem('orderId'),
       workTypeId: sessionStorage.getItem('workTypeId'),
+      selectedBrandId: 0,
 
-      selectedAddress: 0,
+      selectedAddress: 1,
 
-      address: [
-        {
-          addressId: 0,
-          districtId: 0,
-          districtName: '',
-          streetName: '',
-          phone: '',
-        }
-      ],
+      selectedDistrictId: 0,
+
+      errorSubmit: '',
+
+      districts: {
+        districtId: 0,
+        districtName: '',
+      },
+
+      locationRequest: {
+        useDefaultAddress: true,
+        userId: 0,
+        districtId: 0,
+        streetName: '',
+        phone: '',
+        districtName: '',
+      },
+
       brands: [
         {
           brandId: 0,
@@ -286,6 +296,20 @@ export default {
 
   methods: {
 
+    clickSelectedDistrictEvent: function () {
+      this.$emit('clickSelectedDistrictEvent', this.selectedDistrictId)
+    },
+
+    getDistrictSelectBoxInfo: function () {
+      this.$http.get("/order/districts")
+          .then(response => {
+            this.districts = response.data
+          })
+          .catch(error => {
+            console.log(error)
+          })
+    },
+
     getBikeOrderInfo: function () {
       if (this.orderId !== null) {
         this.$http.get("/order/info", {
@@ -301,6 +325,38 @@ export default {
       }
     },
 
+    submitOrder: function () {
+      this.locationRequest.districtId = this.selectedDistrictId
+      this.locationRequest.userId = this.userId
+      this.locationRequest.useDefaultAddress = this.selectedAddress == 1
+      this.errorSubmit = 'Tellimus kinnitatud!'
+      this.addOrder()
+      sessionStorage.removeItem('orderId')
+      this.$router.push({name:'home'})
+
+    },
+
+    addOrder: function () {
+      this.$http.put("/order/submit-order", null, {
+            params: {
+              orderId: this.orderId
+            }
+          }
+      ).then(response => {
+        this.addNewAddressToOrder()
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+
+    addNewAddressToOrder: function () {
+      this.$http.post("/order/address", this.locationRequest
+      ).then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
 
     showProfileAddress: function () {
       this.selectedAddress = 1;
@@ -310,7 +366,7 @@ export default {
             }
           }
       ).then(response => {
-        this.address = response.data
+        this.locationRequest = response.data
       }).catch(error => {
         console.log(error)
       })
@@ -318,8 +374,10 @@ export default {
 
     showCustomAddress: function () {
       this.selectedAddress = 2;
+      this.locationRequest.streetName = ''
+      this.locationRequest.phone = ''
+      this.locationRequest.districtId = 0
     },
-
 
     deleteBikeInfo: function (bikeId) {
       this.$http.delete("/order/bike", {
@@ -392,8 +450,6 @@ export default {
           this.$router.push({
             name: 'repairRoute'
           })
-
-
         }).catch(error => {
           console.log(error)
         })
@@ -402,9 +458,9 @@ export default {
           name: 'repairRoute'
         })
         sessionStorage.setItem('workTypeId', '1')
-
       }
     },
+
     clickToStorageEvent: function () {
       if (this.orderId === null) {
 
@@ -430,7 +486,6 @@ export default {
           name: 'storageRoute'
         })
         sessionStorage.setItem('workTypeId', '3')
-
       }
     },
 
@@ -446,16 +501,15 @@ export default {
         path: '/'
       })
     }
-
   },
 
   beforeMount() {
+    this.showProfileAddress()
     this.getBrandsSelectBoxInfo()
     this.getBike()
     this.getBikeOrderInfo()
+    this.getDistrictSelectBoxInfo()
   }
-
 }
-
 </script>
 
