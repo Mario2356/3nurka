@@ -17,9 +17,10 @@
           <th scope="col">Ratta mark</th>
           <th scope="col">Ratta mudel/kirjeldus</th>
           <th scope="col">Pakett</th>
+          <th scope="col">Hind</th>
           <th scope="col">Probleemi kirjeldus</th>
           <th scope="col">Tehniku kommentaar</th>
-          <th scope="col">Hind</th>
+
           <th scope="col"></th>
         </tr>
         </thead>
@@ -31,13 +32,14 @@
           <td>{{ bikeOrder.bikeBrandName }}</td>
           <td>{{ bikeOrder.bikeModel }}</td>
           <td>{{ bikeOrder.packageFieldName }}</td>
+          <td>{{ bikeOrder.packageFieldPrice }}</td>
           <td>{{ bikeOrder.customerComment }}</td>
           <td><input type="text" v-model="bikeOrder.techComment">
             <button v-on:click="updateTechComment(bikeOrder.bikeOrderId, bikeOrder.techComment)" type="button"
                     class="btn btn-outline-dark float-end me-3">Uuenda
             </button>
           </td>
-          <td>{{ bikeOrder.packageFieldPrice }}</td>
+
           <td><i v-if="errorResponse.message.length > 0" class="fa-regular fa-2x bg-success bg-opacity-50 fa-thumbs-up"></i></td>
         </tr>
         </tbody>
