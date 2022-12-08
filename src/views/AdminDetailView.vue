@@ -30,12 +30,15 @@
           <td>{{ bikeOrder.bikeModel }}</td>
           <td>{{ bikeOrder.packageFieldName }}</td>
           <td>{{ bikeOrder.customerComment }}</td>
-          <td>{{ bikeOrder.techComment }}</td>
+          <td><input type="text" :value="bikeOrder.techComment">
+            <button v-on:click="updateTechComment(bikeOrder.bikeOrderId, bikeOrder.techComment)" type="button" class="btn btn-outline-dark float-end ">Uuenda</button>
+          </td>
           <td>{{ bikeOrder.packageFieldPrice }}</td>
         </tr>
 
         </tbody>
       </table>
+
     </div>
 
 
@@ -80,6 +83,24 @@ export default {
         console.log(error)
       })
     },
+
+    updateTechComment: function (bikeOrderId, techComment) {
+      this.$http.put("/some/path", null, {
+            params: {
+              bikeOrderId: bikeOrderId,
+              techComment: techComment
+            }
+          }
+      ).then(response => {
+
+        //todo mingi success alert
+
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+
 
 
     navigateToAdminView: function () {

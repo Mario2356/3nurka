@@ -1,46 +1,20 @@
 <template>
   <div class="container">
-    <div class="row m-5">
-      <h4>TELLIMUSE VORMISTAMINE</h4>
-    </div>
-    <div class="row ">
-      <div class="col-3 btn-group-vertical align-content-lg-start col-lg-2 mt-5 d-inline">
-        <button type="button" class="btn btn-success mb-3">Minu profiil</button>
+
+    <div class="row align-content-around mt-5 align-text-bottom">
+      <div class="col-md-9 btn-group-vertical align-content-lg-start col-lg-2 mt-5 d-inline">
+<!--        <button type="button" class="btn btn-success mb-3">Minu teenused</button>-->
+        <button v-on:click="navigateToProfileView" type="button" class="btn btn-success mb-3">Minu profiil</button>
         <button v-on:click="logout" type="button" class="btn btn-success">Logi välja</button>
       </div>
-      <div class="col-8 align-items-center ms-5">
-        <div class="row">
-          <h5>1. Minu jalgrattad</h5>
-        </div>
-        <div class="row justify-content-center">
-          <table class="table table-bordered">
-            <thead>
-            <tr>
-              <th scope="col">Ratas</th>
-              <th scope="col">Ratta mudel/kirjeldus</th>
-              <th scope="col">Kustuta valikust</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="bike in bikeResponse">
-              <th scope="row">{{ bike.brandName }}</th>
-              <td>{{ bike.bikeModel }}</td>
-              <td><i v-on:click="deleteBikeInfo(bike.bikeId)" class="fa-solid fa-flag fa-trash-can"></i></td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
+      <div class="row col-lg-8 align-items-center background-dark ms-2 mt-5 pt-5">
+        <p><h4>TELLIMUSE VORMISTAMINE</h4>
+        <p><h6>Vali rippmenüüst ratta mark ja märgi ära ratta mudel või kirjeldus</h6>
       </div>
     </div>
 
 
-    <div class="row align-items-center mt-4">
-      <p><h5>2. Jalgratta lisamiseks:</h5>
-      <p><h6>Vali rippmenüüst jalgratta mark, lisa mudeli number või kirjeldus</h6>
-    </div>
-
-
-    <div class="row justify-content-center">
+    <div class="row align-items-end justify-content-center">
       <div class="col-3">
         <select v-on:change="clickSelectBrandEvent" v-model="selectedBrandId" class="form-select"
                 aria-label="Default select example">
@@ -57,78 +31,40 @@
     </div>
 
 
-    <div class="row justify-content-center mt-4 ">
-      <div class="col-6">
+    <div class="m-5">
       <button v-on:click="addBike" class="btn btn-outline-dark">Lisa ratas valikusse</button>
+    </div>
+
+
+    <div class="row justify-content-center m-5">
+      <div class="col-lg-5">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th scope="col">Ratas</th>
+            <th scope="col">Ratta mudel/kirjeldus</th>
+            <th scope="col">Kustuta valikust</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="bike in bikeResponse">
+            <th scope="row">{{ bike.brandName }}</th>
+            <td>{{ bike.bikeModel }}</td>
+            <td><i v-on:click="deleteBikeInfo(bike.bikeId)" class="fa-solid fa-flag fa-trash-can"></i></td>
+          </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
 
 
-    <!-- ALERT MESSAGE - HETKEL EI TÖÖTA -->
-
-    <!--    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-    <!--      <div class="modal-dialog">-->
-    <!--        <div class="modal-content">-->
-    <!--          <div class="modal-header">-->
-    <!--            <h1 class="modal-title fs-5" id="exampleModalLabel">Kas soovid selle ratta kustutada?</h1>-->
-    <!--            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-    <!--          </div>-->
-    <!--          <div class="modal-fullscreen-sm-down">-->
-    <!--          </div>-->
-    <!--          <div class="modal-footer">-->
-    <!--            <button v-on:click="deleteBikeInfo(bike.bikeId)" class="btn btn-success" type="button">Jah</button>-->
-    <!--            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Ei</button>-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--    </div>-->
-    <div class="row justify-content-center mt-5">
-      <p><h5>3. Vali teenus</h5>
-    </div>
 
 
     <div class="justify-content-center">
       <button v-on:click="clickToRepairEvent" class=" btn btn-outline-success btn-lg m-5">REMONT</button>
       <button v-on:click="navigateToMaintenance" class="btn btn-outline-primary btn-lg m-5">HOOLDUS</button>
-      <button v-on:click="clickToStorageEvent" class="btn btn-outline-warning btn-lg m-5">HOIUSTAMINE</button>
-    </div>
-
-
-    <div v-if="orderId!==null" class="row justify-content-center m-5">
-
-      <h4>Kogutellimuse number: {{ bikeOrderResponse.orderNumber }}</h4>
-      <div class="col-lg-11">
-        <table class="table table-bordered">
-          <thead>
-          <tr>
-            <th scope="col">Teenus</th>
-            <th scope="col">Ratta mark</th>
-            <th scope="col">Ratta mudel</th>
-            <th scope="col">Probleemi kirjeldus</th>
-            <th scope="col">Valitud pakett</th>
-            <th scope="col">Teenuse hind</th>
-          </tr>
-          </thead>
-
-          <tbody>
-          <tr v-for="bikeOrder in bikeOrderResponse.bikeOrders" :key="bikeOrderResponse.bikeOrders.bikeOrderId">
-            <td>{{ bikeOrder.workTypeName }}</td>
-            <td>{{ bikeOrder.bikeBrandName }}</td>
-            <td>{{ bikeOrder.bikeModel }}</td>
-            <td>{{ bikeOrder.customerComment }}</td>
-            <td>{{ bikeOrder.packageFieldName }}</td>
-            <td>{{ bikeOrder.packageFieldPrice }}</td>
-          </tr>
-          </tbody>
-        </table>
-        <h4>Kogumaksumus: {{ bikeOrderResponse.totalPrice }}</h4>
-      </div>
-    </div>
-    <div class="row ">
-      <p><h5>4. Soovi korral lisa veel teenuseid</h5>
-      <p><h5>5. Täida kontaktandmed</h5>
-
+      <button v-on:click="navigateToStorage" class="btn btn-outline-warning btn-lg m-5">HOIUSTAMINE</button>
     </div>
 
     <div class="row justify-content-center">
@@ -177,7 +113,7 @@
       <div class="col-4">
         <div class="row">
           <label for="exampleFormControlInput1"></label>
-          <input class="form-control" placeholder="Tänava nimi ja maja/maja ja korteri number*">
+          <input class="form-control" placeholder="Tänava nimi ja maja/korteri number*">
         </div>
 
         <div class="row">
@@ -195,14 +131,43 @@
         </div>
       </div>
     </div>
-    <div class="m-5">
-      <button class="btn btn-outline-dark">Salvesta</button>
-    </div>
 
+    <div v-if="orderId!==null" class="row justify-content-center m-4">
+      {{ bikeOrderResponse.orderNumber }}
+      <div class="col-lg-11">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th scope="col">Teenus</th>
+            <th scope="col">Ratta mark</th>
+            <th scope="col">Ratta mudel</th>
+            <th scope="col">Probleemi kirjeldus</th>
+            <th scope="col">Valitud pakett</th>
+            <th scope="col">Teenuse hind</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr v-for="bikeOrder in bikeOrderResponse.bikeOrders"
+              :key="bikeOrderResponse.bikeOrders.bikeOrderId">
+            <td>{{ bikeOrder.workTypeName }}</td>
+            <td>{{ bikeOrder.bikeBrandName }}</td>
+            <td>{{ bikeOrder.bikeModel }}</td>
+            <td>{{ bikeOrder.customerComment }}</td>
+            <td>{{ bikeOrder.packageFieldName }}</td>
+            <td>{{ bikeOrder.packageFieldPrice }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <div class="m-5">
       <button class="btn btn-outline-dark">Kinnita tellimus</button>
     </div>
+
+
   </div>
+
 
 </template>
 
@@ -266,7 +231,6 @@ export default {
       },
       bikeOrderResponse: [{
         orderNumber: '',
-        totalPrice: 0,
         bikeOrders: [{
           bikeOrderId: 0,
           bikeBrandName: '',
@@ -274,8 +238,7 @@ export default {
           workTypeName: '',
           packageFieldName: '',
           packageFieldPrice: 0,
-          customerComment: '',
-          techComment: '',
+          customerComment: ''
         }]
       }]
     }
@@ -398,35 +361,6 @@ export default {
         this.$router.push({
           name: 'repairRoute'
         })
-        sessionStorage.setItem('workTypeId', '1')
-
-      }
-    },
-    clickToStorageEvent: function () {
-      if (this.orderId === null) {
-
-        this.$http.post("/order/start", null, {
-              params: {
-                userId: this.userId,
-              }
-            }
-        ).then(response => {
-          this.orderResponse = response.data
-          sessionStorage.setItem('orderId', this.orderResponse.orderId)
-          sessionStorage.setItem('workTypeId', '2')
-          console.log(response.data)
-          this.$router.push({
-            name: 'storageRoute'
-          })
-
-        }).catch(error => {
-          console.log(error)
-        })
-      } else {
-        this.$router.push({
-          name: 'storageRoute'
-        })
-        sessionStorage.setItem('workTypeId', '3')
 
       }
     },
@@ -435,6 +369,20 @@ export default {
       this.$router.push({
         name: 'maintenanceRoute'
       });
+    },
+
+    navigateToStorage: function () {
+      this.$router.push({
+        name: 'storageRoute'
+      })
+    },
+
+    navigateToProfileView: function () {
+      sessionStorage.setItem('userId', this.userId)
+      this.$router.push({
+        name: 'customerProfileRoute'
+      })
+
     },
 
     logout: function () {

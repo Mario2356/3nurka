@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <div class="container mt-5">
+    <div class="container mt-4">
       <div class="row justify-content-around">
         <div class="col-md-4">
 
@@ -39,14 +39,13 @@
         </div>
 
 
-        <div class="col-sm-6 pt-5 pb-5 ms-1 mb-5 ">
+        <div class="col-sm-6 pt-5 pb-5 ms-1">
           <img src="../assets/image_1.jpg" alt="image_1" class="register-image">
         </div>
 
-
       </div>
-    </div>
 
+    </div>
   </div>
 
 </template>

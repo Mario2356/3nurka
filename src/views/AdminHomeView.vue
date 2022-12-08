@@ -1,42 +1,46 @@
 <template>
+
   <div>
     <div class="container m-5">
       <h3 class="pt-5">TELLIMUSED</h3>
-      <table class="table table-hover m-5">
-        <thead class="m-5">
-        <tr>
-          <th scope="col">Tellimuse number</th>
-          <th scope="col">Teenus</th>
-          <th scope="col">Tellimuse kuupäev</th>
-          <th scope="col">Tellimuse staatus</th>
-          <th scope="col">Kliendi nimi</th>
-          <th scope="col">Lisainfo</th>
-        </tr>
-        </thead>
+      <table class="table table-hover table-sm m-5">
+            <thead>
+              <tr>
+                <th class="th-sm" scope="col">Tellimuse number</th>
+                <th class="th-sm" scope="col">Teenus</th>
+                <th scope="col">Tellimuse kuupäev</th>
+                <th scope="col">Tellimuse staatus</th>
+                <th scope="col">Kliendi nimi</th>
+                <th scope="col">Lisainfo</th>
+              </tr>
+              </thead>
 
-        <tbody>
-        <tr v-for="bikeOrder in adminOrderRequest" :key="bikeOrder.orderId">
-          <th scope="row">{{ bikeOrder.orderNumber }}</th>
-          <td>{{ bikeOrder.workTypeName }}</td>
-          <td>{{ bikeOrder.orderDateFrom }}</td>
-          <td>{{ bikeOrder.orderStatusName }}</td>
-          <td> {{ bikeOrder.firstName }} {{ bikeOrder.lastName }}</td>
-          <td>
-            <button type="button" v-on:click="navigateToAdminDetailRoute(bikeOrder.orderId)"
-                    class="btn btn-outline-dark">Lisainfo
-            </button>
-          </td>
-        </tr>
+              <tbody>
+              <tr v-for="bikeOrder in adminOrderRequest" :key="bikeOrder.orderId">
+                <th scope="row">{{ bikeOrder.orderNumber }}</th>
+                <td>{{ bikeOrder.workTypeName }}</td>
+                <td>{{ bikeOrder.orderDateFrom }}</td>
+                <td>{{ bikeOrder.orderStatusName }}</td>
+                <td> {{ bikeOrder.firstName }} {{ bikeOrder.lastName }}</td>
+                <td>
+                  <button type="button" v-on:click="navigateToAdminDetailRoute(bikeOrder.orderId)"
+                          class="btn btn-outline-dark">Lisainfo
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
 
-        </tbody>
-      </table>
     </div>
+
   </div>
 
 
 </template>
 
 <script>
+
+
 export default {
   name: "AdminHomeView",
 
@@ -95,9 +99,11 @@ export default {
   beforeMount() {
     this.adminAllOrders()
 
-
   }
 
-}
+};
+
+
+
 </script>
 

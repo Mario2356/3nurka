@@ -8,6 +8,7 @@ import "bootstrap/dist/js/bootstrap.js"
 import "../src/assets/Stylesheet3nurka.css"
 
 
+
 Vue.use(VueAxios, axios);
 Vue.config.productionTip = false
 
