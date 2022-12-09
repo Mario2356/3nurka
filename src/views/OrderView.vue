@@ -3,12 +3,8 @@
     <div class="row m-5">
       <h4>TELLIMUSE VORMISTAMINE</h4>
     </div>
-    <div class="row ">
-      <div class="col-3 btn-group-vertical align-content-lg-start col-lg-2 mt-5 d-inline">
-        <button v-on:click="navigateToProfileView" type="button" class="btn btn-success mb-3">Minu profiil</button>
-        <button v-on:click="logout" type="button" class="btn btn-success">Logi välja</button>
-      </div>
-      <div class="col-8 align-items-center ms-5">
+    <div class="row justify-content-center ">
+      <div class=" col-6 align-items-center ms-5">
         <div class="row">
           <h5>1. Minu jalgrattad</h5>
         </div>
@@ -89,12 +85,12 @@
 
 
     <div class="justify-content-center">
-      <button v-on:click="clickToRepairEvent" class=" btn btn-outline-success btn-lg m-5">REMONT</button>
-      <button v-on:click="navigateToMaintenance" class="btn btn-outline-primary btn-lg m-5">HOOLDUS</button>
+      <button v-on:click="clickToRepairEvent" class=" btn btn-outline-success btn-lg m-5"> REMONT </button>
+      <button v-on:click="clickToMaintenanceEvent" class="btn btn-outline-primary btn-lg m-5">HOOLDUS</button>
       <button v-on:click="clickToStorageEvent" class="btn btn-outline-warning btn-lg m-5">HOIUSTAMINE</button>
     </div>
-    <div class="row">
-      <p><h5>4. Soovi korral lisa veel teenuseid</h5>
+    <div class="row align-items-end">
+     <h5>4. Soovi korral lisa veel teenuseid</h5>
     </div>
 
 
@@ -203,7 +199,7 @@
       </div>
     </div>
     <div class="m-5">
-      <button v-on:click="submitOrder()" class="btn btn-outline-dark">Kinnita tellimus</button>
+      <button v-on:click="submitOrder()" class="btn btn-success">Kinnita tellimus</button>
     </div>
 
   </div>
@@ -412,7 +408,6 @@ export default {
       this.bikeRequest.brandId = this.selectedBrandId
       this.$http.post("/order/bike", this.bikeRequest
       ).then(response => {
-        //Todo vaja käivitada teenus getAllUserBikes
         this.getBike();
         console.log(response.data)
       }).catch(error => {
@@ -472,7 +467,7 @@ export default {
         ).then(response => {
           this.orderResponse = response.data
           sessionStorage.setItem('orderId', this.orderResponse.orderId)
-          sessionStorage.setItem('workTypeId', '2')
+          sessionStorage.setItem('workTypeId', '3')
           console.log(response.data)
           this.$router.push({
             name: 'storageRoute'
@@ -489,25 +484,32 @@ export default {
       }
     },
 
-    navigateToMaintenance: function () {
-      this.$router.push({
-        name: 'maintenanceRoute'
-      });
-    },
+    clickToMaintenanceEvent: function () {
+      if (this.orderId === null) {
 
-    navigateToProfileView: function () {
-      sessionStorage.setItem('userId', this.userId)
-      this.$router.push({
-        name: 'customerProfileRoute'
-      })
+        this.$http.post("/order/start", null, {
+              params: {
+                userId: this.userId,
+              }
+            }
+        ).then(response => {
+          this.orderResponse = response.data
+          sessionStorage.setItem('orderId', this.orderResponse.orderId)
+          sessionStorage.setItem('workTypeId', '2')
 
-    },
-
-    logout: function () {
-      sessionStorage.clear()
-      this.$router.push({
-        path: '/'
-      })
+          console.log(response.data)
+          this.$router.push({
+            name: 'maintenanceRoute'
+          })
+        }).catch(error => {
+          console.log(error)
+        })
+      } else {
+        this.$router.push({
+          name: 'maintenanceRoute'
+        })
+        sessionStorage.setItem('workTypeId', '2')
+      }
     }
   },
 

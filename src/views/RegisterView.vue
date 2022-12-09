@@ -95,7 +95,7 @@ export default {
         ).then(response => {
           this.registerResponse = response.data
           sessionStorage.setItem('userId', this.registerResponse.userId)
-          // push edasi
+          this.$emit('updateStatusEvent')
           this.$router.push({name: 'orderRoute'})
 
         }).catch(error => {

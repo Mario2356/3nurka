@@ -46,9 +46,9 @@
           </div><!-- /col-sm-offset-3 col-sm-9 -->
         </div><!-- /form-group -->
 
-        <div class="form-group mt-5 pt-3">
+        <div class="form-group mt-5 pt-3 mb-5 pb-5">
           <div class="col-sm-offset-8 col-sm-10">
-            <button type="button" class="btn btn-outline-success">Kinnita muudetud andmed</button>
+            <button type="button" class="btn btn-outline-success mb-5">Kinnita muudetud andmed</button>
           </div>
         </div>
       </form>
