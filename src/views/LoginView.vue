@@ -6,14 +6,14 @@
         <div class="col-md-4">
 
           <div class="input-group ms-3 mt-5 pt-5 mb-4">
-            <span class="input-group-text input-width" id="inputGroup-sizing-default">e-posti aadress</span>
+            <span class="input-group-text input-width" id="inputGroup-sizing-default">e-posti aadress*</span>
             <input v-model="email" type="text" class="form-control" aria-label="Sizing example input"
                    aria-describedby="inputGroup-sizing-default">
           </div>
 
 
           <div class="input-group ms-3">
-            <span class="input-group-text input-width" id="inputGroup-sizing-default w-75">Parool</span>
+            <span class="input-group-text input-width" id="inputGroup-sizing-default w-75">Parool*</span>
             <input v-model="password" type="password" class="form-control" aria-label="Sizing example input"
                    aria-describedby="inputGroup-sizing-default">
           </div>
@@ -75,7 +75,6 @@ export default {
 
 
     login: function () {
-
       this.errorResponse.message = ''
       if (this.email.length == 0 || this.password.length == 0) {
         this.errorResponse.message = 'Täida kõik väljad';

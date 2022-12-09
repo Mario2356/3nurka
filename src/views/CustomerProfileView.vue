@@ -37,12 +37,21 @@
           </select>
         </div>
 
-        <div class="form-group mt-5 pt-3">
+        <div class="form-group mt-5 pt-3 mb-5 pb-5">
           <div class="col-sm-offset-8 col-sm-10">
-            <button v-on:click="submitProfileAddress" type="button" class="btn btn-outline-success">Kinnita muudetud
+            <button v-on:click="submitProfileAddress" type="button" class="btn btn-outline-success mb-5">Kinnita
+              muudetud
               andmed
             </button>
+
+            <div class="row justify-item-center">
+              <div class="col-10 align-item-center">
+                {{ errorProfile }}
+              </div>
+            </div>
           </div>
+
+
         </div>
       </form>
     </div>
@@ -61,6 +70,7 @@ export default {
     return {
       userId: Number(sessionStorage.getItem('userId')),
       selectedDistrictId: 0,
+      errorProfile: '',
       locationRequest: {
         useDefaultAddress: true,
         userId: 0,
@@ -80,6 +90,7 @@ export default {
     submitProfileAddress: function () {
       this.locationRequest.districtId = this.selectedDistrictId
       this.locationRequest.userId = this.userId
+      this.errorProfile = 'Andmed kinnitatud!'
       this.$http.post("/profile/address", this.locationRequest
       ).then(response => {
         console.log(response.data)

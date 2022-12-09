@@ -35,11 +35,15 @@
         </div>
         <div class="row ms-2">*kohustuslikud väljad</div>
         <div class="col-8 ps-5 ms-5">
-          <div class="row input-group mt-4">
+          <div class="row input-group mt-4 mb-3">
             <button v-on:click="addCustomer()" type="button" class="btn btn-success">Loo konto</button>
           </div>
 
         </div>
+        <div v-if="errorResponse.message.length > 0" class="alert alert-danger mb-5 align-items-center" role="alert">
+          {{ errorResponse.message }}
+        </div>
+
       </div>
 
       <div class="col-sm-6 pt-5 pb-5 ms-1">
@@ -79,19 +83,28 @@ export default {
   },
   methods: {
     addCustomer: function () {
-      this.$http.post("/register/new", this.registerRequest
-      ).then(response => {
-        this.registerResponse = response.data
-        sessionStorage.setItem('userId', this.registerResponse.userId)
-        // push edasi
-        this.$router.push({name: 'orderRoute'})
+      this.errorResponse.message = ''
+      if (this.registerRequest.firstName.length == 0 || this.registerRequest.lastName.length == 0 ||
+          this.registerRequest.email.length == 0 || this.registerRequest.password.length == 0 ||
+          this.repeatPassword.length == 0) {
+        this.errorResponse.message = 'Täida kõik väljad';
+      } else {
 
-      }).catch(error => {
-        console.log(error)
-      })
-    },
 
-  }
+        this.$http.post("/register/new", this.registerRequest
+        ).then(response => {
+          this.registerResponse = response.data
+          sessionStorage.setItem('userId', this.registerResponse.userId)
+          this.$emit('updateStatusEvent')
+          this.$router.push({name: 'orderRoute'})
+
+        }).catch(error => {
+          console.log(error)
+        })
+      }
+
+    }
+  },
 }
 </script>
 
