@@ -9,7 +9,7 @@
           <h5>1. Minu jalgrattad</h5>
         </div>
         <div class="row justify-content-center">
-          <table class="table table-bordered">
+          <table class="table table-success table-striped">
             <thead>
             <tr>
               <th scope="col">Ratas</th>
@@ -98,7 +98,7 @@
 
       <h5>Kogutellimuse number: {{ bikeOrderResponse.orderNumber }}</h5>
       <div class="col-lg-11">
-        <table class="table table-bordered">
+        <table class="table table-success table-striped">
           <thead>
           <tr>
             <th scope="col">Teenus</th>
