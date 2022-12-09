@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <div class="container m-5">
+    <div class="container m-5 justify-content-center">
       <h3 class="p-5">TELLIMUSE LISAINFO</h3>
       <div class="row col-md-2mt-5 mb-5">
         <div class="col">
@@ -10,7 +10,7 @@
         </div>
       </div>
 
-      <table class=" table table-hover m-5">
+      <table class=" table table-success table-striped">
         <thead class="m-5">
         <tr>
           <th scope="col">Teenus</th>
