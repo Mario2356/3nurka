@@ -38,6 +38,9 @@
           <div class="row input-group mt-4">
             <button v-on:click="addCustomer()" type="button" class="btn btn-success">Loo konto</button>
           </div>
+          <div v-if="errorResponse.message.length > 0" class="alert alert-danger mt-3 align-items-center" role="alert">
+            {{ errorResponse.message }}
+          </div>
 
         </div>
       </div>
@@ -79,20 +82,26 @@ export default {
   },
   methods: {
     addCustomer: function () {
-      this.$http.post("/register/new", this.registerRequest
-      ).then(response => {
-        this.registerResponse = response.data
-        sessionStorage.setItem('userId', this.registerResponse.userId)
-        // push edasi
-        this.$router.push({name: 'orderRoute'})
+      this.errorResponse.message = ''
+      if (this.registerRequest.firstName.length == 0 || this.registerRequest.lastName.length == 0 ||
+          this.registerRequest.email.length == 0 || this.registerRequest.password.length == 0) {
+        this.errorResponse.message = 'Täida kõik väljad';
+      } else {
+        this.$http.post("/register/new", this.registerRequest
+        ).then(response => {
+          this.registerResponse = response.data
+          sessionStorage.setItem('userId', this.registerResponse.userId)
+          this.$emit('updateStatusEvent')
+          this.$router.push({name: 'orderRoute'})
 
-      }).catch(error => {
-        console.log(error)
-      })
-    },
-
+        }).catch(error => {
+          console.log(error)
+        })
+      }
+    }
   }
 }
+
 </script>
 
 <style scoped>

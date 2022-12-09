@@ -1,14 +1,6 @@
 <template>
   <div class="container">
 
-    <div class="row align-items-start ps-5 ms-5 mt-5">
-      <div class="col btn-group-vertical align-content-lg-start col-lg-2 mt-5">
-        <button type="button" class="btn btn-success mb-3">Minu teenused</button>
-        <button type="button" class="btn btn-success mb-3">Minu profiil</button>
-        <button v-on:click="logout" type="button" class="btn btn-success">Logi välja</button>
-      </div>
-    </div>
-
     <div class="row m-4">
       <h5>Telli jalgrattale hoiustamine</h5>
     </div>
@@ -129,14 +121,7 @@ export default {
       }).catch(error => {
         console.log(error)
       })
-    },
-    logout: function () {
-      sessionStorage.clear()
-      this.$router.push({
-        path: '/'
-      })
     }
-
   },
   beforeMount() {
     this.getBikesByUserId()
